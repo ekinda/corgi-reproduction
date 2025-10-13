@@ -5,20 +5,22 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT / "code"))
-import glob
+DATA_DIR = REPO_ROOT / "data"
 import logging
 import numpy as np
 import subprocess
 import pandas as pd
 from scipy.stats import pearsonr, spearmanr
 import torch
-import torch.nn.functional as F
 from pyfaidx import Fasta
 import h5py
 from collections import defaultdict
+from contextlib import nullcontext
 from benchmark_utils import transform_params, special_atac_params, transform_softclip, transform_scale, transform_scale_special
 from benchmark_utils import undo_squashed_scale, parse_bed_file_with_coords, one_hot_encode, load_genome, tile_region, tile_regions, crop_center
 from benchmark_utils import dna_rc, predictions_rc, shift_dna, process_coverage, fast_bin
+from corgi.config import config_corgi
+from corgi.model import Corgi
 
 # --- Global parameters ---
 EXPORT_TO_BIGWIG = True
@@ -33,12 +35,12 @@ TARGET_BINS = 6144          # number of bins required
 assert GT_SEQ_LENGTH // BINSIZE == TARGET_BINS
 
 # File paths
-BED_FILE = REPO_ROOT / "data" / "figure2" / "fold3_notf_merged.bed"
-GENOME_FASTA = REPO_ROOT / "data" / "hg38.ml.fa"
-GT_DATA_DIR = REPO_ROOT / "data" / "ground_truth"  # TODO: point to directory containing per-tissue .h5 files
-TF_EXP_FILE = REPO_ROOT / "data" / "figure2" / "tf_expression.npy"
-CHROM_SIZES_FILE = REPO_ROOT / "data" / "hg38.chrom.sizes"  # TODO: copy hg38 chrom sizes file into project data directory
-OUTDIR = REPO_ROOT / "data" / "figure2" / "cross_cell_tta"
+BED_FILE = DATA_DIR / "figure2" / "borzoi_trainingfolds_subset.bed"
+GENOME_FASTA = DATA_DIR / "hg38.ml.fa"
+GT_DATA_DIR = DATA_DIR / "ground_truth"
+TF_EXP_FILE = DATA_DIR / "tf_expression.npy"
+CHROM_SIZES_FILE = DATA_DIR / "hg38.chrom.sizes"
+OUTDIR = REPO_ROOT / "processed_data" / "figure2" / "cross_cell_tta"
 # (expecting GT files to be found in: GT_DATA_DIR/{tissue_id}/*.h5,
 # and that for each experiment the filename starts with the borzoi_track_id)
 
@@ -53,22 +55,19 @@ tissues = [46, 47, 49, 50, 54, 105, 159, 160, 161, 174, 202, 203, 211, 212, 213,
 regular_tracks = ['dnase','atac','h3k4me1','h3k4me2','h3k4me3','h3k9ac','h3k9me3','h3k27ac','h3k27me3','h3k36me3','h3k79me2','ctcf','rna_10x','wgbs']
 stranded_tracks = ['cage', 'rampage', 'rna_total', 'rna_polya']
 
-with open(REPO_ROOT / 'data' / 'experiments_final.txt', 'r') as f:
+with open(DATA_DIR / 'experiments_final.txt', 'r', encoding='utf-8') as f:
     experiments_list = f.read().strip().split()
 
 exp_name_to_channel_id = {exp:i for i,exp in enumerate(experiments_list)}
 
 # --- Model loading functions ---
 def load_grt_model(device):
-    """
-    Load the GRT model.
-    (Adjust this to import your actual model class.)
-    """
-    from models import GRT_v3_Pretraining2
-    from config import config_molgen as config
-    model = GRT_v3_Pretraining2(config).to(device)
-    ckpt = torch.load(GRT_CHECKPOINT, map_location=device)
-    model.load_state_dict(ckpt['model_state_dict'])
+    """Load the packaged Corgi checkpoint."""
+    config = dict(config_corgi)
+    model = Corgi(config).to(device)
+    checkpoint = torch.load(GRT_CHECKPOINT, map_location=device)
+    state = checkpoint.get('model_state_dict', checkpoint)
+    model.load_state_dict(state, strict=True)
     model.eval()
     return model
 
@@ -142,7 +141,7 @@ def export_bedgraph_and_bigwig(df, model_type, outdir, chrom_sizes, tracks_to_ex
         # Iterate over unique (tissue, experiment) pairs.
         for (tissue, experiment), group in df.groupby(["tissue", "experiment"]):
             # Only process allowed experiments (compare in lower-case).
-            if tracks_to_export is not 'all':
+            if tracks_to_export != 'all':
                 if experiment.lower() not in tracks_to_export:
                     continue
             # For prediction models (GRT or Borzoi), export only if GT is available.

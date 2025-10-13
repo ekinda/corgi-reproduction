@@ -18,9 +18,9 @@ BENCHMARK_CMDS = [
 
 POSTPROCESS_CMDS = [
     [sys.executable, str(CODE_DIR / "gene_level_correlations_crosscell.py")],
-    # TODO: Add the crossboth script here.
-    [sys.executable, str(CODE_DIR / "gene_level_correlations.py")],
-    # TODO: add CLI entry point for "gene level correlations fixed" notebook to emit correlations_fixed.pk files.
+    [sys.executable, str(CODE_DIR / "gene_level_correlations_crossboth.py")],
+    [sys.executable, str(CODE_DIR / "gene_level_correlations_crosssequence.py")],
+    [sys.executable, str(CODE_DIR / "gene_level_correlations_fixed.py")],
 ]
 
 

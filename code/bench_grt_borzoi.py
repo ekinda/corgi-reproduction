@@ -1,25 +1,36 @@
 #!/usr/bin/env python
-import sys
 import os
-sys.path.insert(0, os.path.abspath('/project/deeprna/scripts/GRT_v3'))
-import glob
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import logging
-import numpy as np
 import subprocess
+from collections import defaultdict
+
+import h5py
+import numpy as np
 import pandas as pd
-from scipy.stats import pearsonr, spearmanr
 import torch
 import torch.nn.functional as F
-from pyfaidx import Fasta
-import h5py
-from collections import defaultdict
+from scipy.stats import pearsonr, spearmanr
 
 from borzoi_pytorch import Borzoi
 from borzoi_pytorch.pytorch_borzoi_helpers import predict_tracks
 
+from corgi.corgi.config import config_corgi
+from corgi.corgi.model import Corgi
+
 from benchmark_utils import transform_params, special_atac_params, transform_softclip, transform_scale, transform_scale_special
 from benchmark_utils import undo_squashed_scale, parse_bed_file_with_coords, one_hot_encode, load_genome, tile_region, tile_regions, crop_center
 from benchmark_utils import dna_rc, predictions_rc, shift_dna, process_coverage, fast_bin
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = REPO_ROOT / "data"
+FIG3_DIR = DATA_DIR / "figure3"
+PROCESSED_DIR = REPO_ROOT / "processed_data" / "figure3"
+NOTEBOOK_DIR = REPO_ROOT / "notebook_data" / "figure3"
 
 # --- Global parameters ---
 # Tiling for model predictions:
@@ -34,16 +45,16 @@ TARGET_BINS = 3072          # number of bins required (3072*64 = 196608 bp)
 assert GT_SEQ_LENGTH // BINSIZE == TARGET_BINS
 
 # File paths
-BED_FILE = "/project/deeprna/data/borzoi_fold3_merged.bed"
-TRACKS_CSV = "/project/deeprna/data/training_tissues_borzoi_matches_extended.csv"
-GENOME_FASTA = "/project/deeprna_data/borzoi/hg38.ml.fa"
-GT_DATA_DIR = "/project/deeprna_data/pretraining_data_merged" 
-TF_EXP_FILE = '/project/deeprna_data/pretraining_data_final2/tf_expression.npy'
-CHROM_SIZES_FILE = "/project/deeprna/data/hg38/hg38.chrom.sizes"
-OUTDIR = "/project/deeprna/benchmark/grt_vs_borzoi"
+BED_FILE = FIG3_DIR / "borzoi_fold3_merged.bed"
+TRACKS_CSV = FIG3_DIR / "training_tissues_borzoi_matches_extended.csv"
+GENOME_FASTA = DATA_DIR / "hg38.ml.fa"
+GT_DATA_DIR = DATA_DIR / "ground_truth"
+TF_EXP_FILE = DATA_DIR / "tf_expression.npy"
+CHROM_SIZES_FILE = DATA_DIR / "hg38.chrom.sizes"
+OUTDIR = PROCESSED_DIR / "grt_vs_borzoi"
 
 # Model checkpoint
-GRT_CHECKPOINT = '/project/deeprna/models/grt_v3_pretraining/adaptive_mn/grt_epoch_4_2025-03-25_20:34.pt'
+GRT_CHECKPOINT = DATA_DIR / "corgi_model.pt"
 BORZOI_NUM = 4     # For Borzoi, we load the ensemble of 4 replicates
 
 # --- Model loading functions ---
@@ -85,11 +96,11 @@ def load_grt_model(device):
     Load the GRT model.
     (Adjust this to import your actual model class.)
     """
-    from models import GRT_v3_Pretraining2
-    from config import config_molgen as config
-    model = GRT_v3_Pretraining2(config).to(device)
+    config = dict(config_corgi)
+    model = Corgi(config).to(device)
     ckpt = torch.load(GRT_CHECKPOINT, map_location=device)
-    model.load_state_dict(ckpt['model_state_dict'])
+    state_dict = ckpt.get('model_state_dict', ckpt)
+    model.load_state_dict(state_dict)
     model.eval()
     return model
 
@@ -146,6 +157,25 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logging.info(f"Using device: {device}")
 
+    required_inputs = [
+        (BED_FILE, "Borzoi evaluation BED (borzoi_fold3_merged.bed)"),
+        (TRACKS_CSV, "Borzoi track mapping CSV (training_tissues_borzoi_matches_extended.csv)"),
+        (GENOME_FASTA, "Reference genome FASTA (hg38.ml.fa)"),
+        (CHROM_SIZES_FILE, "hg38 chromosome sizes"),
+        (TF_EXP_FILE, "Corgi TF expression array (tf_expression.npy)"),
+    ]
+    for path, description in required_inputs:
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Missing {description} at {path}. "
+                "Please place the file inside the repository's data/ directory before rerunning."
+            )
+    if not GT_DATA_DIR.exists():
+        raise FileNotFoundError(
+            f"Missing ground-truth directory at {GT_DATA_DIR}. "
+            "Populate data/ground_truth/ with per-tissue HDF5 files from the benchmark bundle."
+        )
+
     # Load the tracks CSV.
     tracks_df = pd.read_csv(TRACKS_CSV)
     logging.info(f"Loaded {len(tracks_df)} rows from grt-vs-borzoi CSV.")
@@ -170,7 +200,7 @@ def main():
     tf_expression = torch.from_numpy(np.load(TF_EXP_FILE)).float()
     logging.info(f"Loaded TF expression from {TF_EXP_FILE}")
 
-    with open('/project/deeprna/data/experiments_final.txt', 'r') as f:
+    with open(DATA_DIR / 'experiments_final.txt', 'r', encoding='utf-8') as f:
         experiments_list = f.read().strip().split()
     exp_name_to_channel_id = {exp:i for i,exp in enumerate(experiments_list)}
 
@@ -185,7 +215,13 @@ def main():
 
     # Borzoi
     logging.info(f"Beginning Borzoi calculations.")
-    targets_df = pd.read_csv('/project/deeprna/data/targets_human.txt', sep='\t', index_col=0)
+    targets_path = FIG3_DIR / 'targets_human.txt'
+    if not targets_path.exists():
+        raise FileNotFoundError(
+            f"Missing Borzoi target metadata at {targets_path}. "
+            "Please place the targets_human.txt file provided with the Borzoi release into data/figure3/."
+        )
+    targets_df = pd.read_csv(targets_path, sep='\t', index_col=0)
     for (chrom, tile_start, tile_end) in pred_tiles:
         # Get sequence for the full 524kb tile.
         try:
@@ -309,9 +345,16 @@ def main():
             "pearson": round(borzoi_pearson, 3),
             "spearman": round(borzoi_spearman, 3)
         })
+    OUTDIR.mkdir(parents=True, exist_ok=True)
+    NOTEBOOK_DIR.mkdir(parents=True, exist_ok=True)
+
     corr_df = pd.DataFrame(corr_results)
-    corr_df.to_csv(f"{OUTDIR}/correlation_results.csv", index=False)
-    logging.info(f"Correlation results written to {OUTDIR}/correlation_results.csv")
+    corr_path = OUTDIR / "correlation_results.csv"
+    corr_df.to_csv(corr_path, index=False)
+    logging.info("Correlation results written to %s", corr_path)
+    notebook_corr = NOTEBOOK_DIR / "correlation_results.csv"
+    corr_df.to_csv(notebook_corr, index=False)
+    logging.info("Notebook copy written to %s", notebook_corr)
     
     # --- Writing to bigwig ---
     def export_bedgraph_to_bigwig(df, model_type, outdir, chrom_sizes):
@@ -339,18 +382,27 @@ def main():
                     bin_end = bin_start + BINSIZE
                     bedgraph_lines.append(f"{chrom}\t{bin_start}\t{bin_end}\t{score}")
             # Create file paths.
-            bg_path = os.path.join(outdir, f"tissue{tissue}_{experiment}_{model_type}.bedgraph")
-            bw_path = os.path.join(outdir, f"tissue{tissue}_{experiment}_{model_type}.bw")
+            outdir.mkdir(parents=True, exist_ok=True)
+            bg_path = outdir / f"tissue{tissue}_{experiment}_{model_type}.bedgraph"
+            bw_path = outdir / f"tissue{tissue}_{experiment}_{model_type}.bw"
             # Write bedGraph file.
-            with open(bg_path, "w") as f:
-                f.write("\n".join(bedgraph_lines))
+            bg_path.write_text("\n".join(bedgraph_lines), encoding="utf-8")
             # Convert bedGraph to BigWig.
-            subprocess.run(["bedGraphToBigWig", bg_path, CHROM_SIZES_FILE, bw_path], check=True)
-            print(f"Exported {model_type} BigWig for tissue {tissue}, experiment {experiment} to {bw_path}")
+            subprocess.run(
+                ["bedGraphToBigWig", str(bg_path), str(chrom_sizes), str(bw_path)],
+                check=True,
+            )
+            logging.info(
+                "Exported %s BigWig for tissue %s, experiment %s to %s",
+                model_type,
+                tissue,
+                experiment,
+                bw_path,
+            )
             #os.remove(bg_path)
 
     # Export BigWigs for predictions and ground truth.
-    export_bedgraph_to_bigwig(grt_df, "grt", OUTDIR, CHROM_SIZES_FILE)
+    export_bedgraph_to_bigwig(grt_df, "corgi", OUTDIR, CHROM_SIZES_FILE)
     export_bedgraph_to_bigwig(borzoi_df, "borzoi", OUTDIR, CHROM_SIZES_FILE)
     export_bedgraph_to_bigwig(gt_df, "encode", OUTDIR, CHROM_SIZES_FILE)
     

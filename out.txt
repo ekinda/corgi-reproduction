@@ -1,0 +1,3 @@
+
+==> Benchmarking (cross-cell, cross-both, cross-sequence)
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/bench_grt_tta_crosscell.py

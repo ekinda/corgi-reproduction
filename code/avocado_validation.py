@@ -1,45 +1,81 @@
+import argparse
 import pickle
-import numpy; numpy.random.seed(0)
+from pathlib import Path
+
+import numpy
+
+numpy.random.seed(0)
+
 import os
-import glob
+
 os.environ['KERAS_BACKEND'] = 'theano'
-#os.environ['THEANO_FLAGS']="device=gpu0,floatX=float32,dnn.enabled=False"
+# os.environ['THEANO_FLAGS']="device=gpu0,floatX=float32,dnn.enabled=False"
 from avocado import Avocado
 
-test_tissues = [46, 47, 49, 50, 54, 105, 159, 160, 161, 174, 202, 203, 211, 212, 213,
-                             214, 239, 267, 268, 275, 276, 277, 278, 288, 318, 319, 320, 321,
-                             323, 324, 422, 442, 443, 473, 474, 515, 517]
+REPO_ROOT = Path(__file__).resolve().parent.parent
+PROCESSED_ROOT = REPO_ROOT / "processed_data" / "figure4"
+DEFAULT_DATA_DIR = PROCESSED_ROOT / "avocado_trainingfolds"
+DEFAULT_MODEL_DIR = PROCESSED_ROOT / "avocado_models"
+DEFAULT_OUTPUT_DIR = PROCESSED_ROOT / "avocado_predictions" / "validation"
 
-#valid_tissues = [17, 39, 60, 66, 70, 71, 72, 73, 82, 97, 98, 99, 136, 137, 227,
-#                       236, 240, 306, 307, 312, 339, 340, 341, 342, 349, 425, 458, 482]
+VALID_TISSUES = [17, 39, 60, 66, 71, 82, 97, 136, 137, 227, 236, 240, 306, 312, 339, 342, 349]
+ALLOWED_ASSAYS = {'dnase', 'atac', 'h3k4me1', 'h3k4me3', 'h3k9ac', 'h3k27ac', 'ctcf'}
 
-valid_tissues = [17, 39, 60, 66, 71, 82, 97, 136, 137, 227, 236, 240, 306, 312, 339, 342, 349]
 
-easytest_tissues = [3, 25, 64, 87, 90, 98, 106, 115, 124, 137, 159, 189, 192, 247,
-                     283, 284, 300, 311, 332, 334, 345, 448, 467, 480, 481, 532, 582]
+def list_available_assays(data_dir: Path, tissue: int):
+    assays = []
+    for tensor_path in sorted(data_dir.glob(f"tissue_{tissue}_*.npy")):
+        assay = tensor_path.stem.split("_", 2)[2]
+        if assay in ALLOWED_ASSAYS:
+            assays.append(assay)
+    return assays
 
-celltypes = list(range(0,392))
 
-with open('/project/deeprna_data/pretraining_data_final2/experiments_final.txt', 'r') as f:
-    assays = f.read().strip().split()
+def run_validation(data_dir: Path, model_dir: Path, output_dir: Path, epochs, model_prefix: str):
+    if not data_dir.exists():
+        raise FileNotFoundError(f"Missing Avocado tensors at {data_dir}. Run avocado_prepare_data2.py first.")
+    model_dir = model_dir.resolve()
+    if not model_dir.exists():
+        raise FileNotFoundError(f"Missing Avocado models at {model_dir}. Train the models before validation.")
 
-for epoch in [2000, 2200, 2300, 2500, 2600, 2900, 3000, 3300]:
-    print("Processing epoch {}".format(epoch))
-    model = Avocado.load('/project/deeprna/benchmark/avocado/avocado_trainingfolds_epoch_{}'.format(epoch))
+    output_dir.mkdir(parents=True, exist_ok=True)
 
-    predictions = {}
-    for tissue in valid_tissues:
-        available_assays = []
-        for file in glob.glob('/project/deeprna_data/avocado_data_trainingfolds/tissue_{}_*.npy'.format(tissue)):
-            assay = '_'.join(file.split('/')[-1].split('_')[2:]).split('.')[0]
-            if assay in ['dnase', 'atac', 'h3k4me1', 'h3k4me3', 'h3k9ac', 'h3k27ac', 'ctcf']:
-                available_assays.append(assay)
-                
-        print("Tissue {}: {}".format(tissue, available_assays))
-        for assay in available_assays:
-            if assay not in predictions:
-                predictions[assay] = {}
-            predictions[assay][tissue] = model.predict(tissue, assay)
+    for epoch in epochs:
+        model_path = model_dir / f"{model_prefix}{epoch}"
+        if not model_path.exists():
+            raise FileNotFoundError(f"Checkpoint {model_path} not found.")
+        print(f"Processing epoch {epoch} using checkpoint {model_path}")
+        model = Avocado.load(str(model_path))
 
-    with open('/project/deeprna_data/avocado_validation/avocado_trainingfolds_epoch_{}_predictions.pkl'.format(epoch), 'wb') as f:
-        pickle.dump(predictions, f)
+        predictions = {}
+        for tissue in VALID_TISSUES:
+            available_assays = list_available_assays(data_dir, tissue)
+            print(f"Tissue {tissue}: {available_assays}")
+            for assay in available_assays:
+                predictions.setdefault(assay, {})[tissue] = model.predict(tissue, assay)
+
+        out_path = output_dir / f"avocado_trainingfolds_epoch_{epoch}_predictions.pkl"
+        with out_path.open("wb") as handle:
+            pickle.dump(predictions, handle)
+        print(f"Saved validation predictions to {out_path}")
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Generate Avocado validation predictions across multiple checkpoints.")
+    parser.add_argument("--data-dir", default=str(DEFAULT_DATA_DIR), help="Directory with prepared tissue_#_assay.npy tensors.")
+    parser.add_argument("--model-dir", default=str(DEFAULT_MODEL_DIR), help="Directory containing Avocado checkpoints.")
+    parser.add_argument("--model-prefix", default="avocado_trainingfolds_epoch_", help="Checkpoint prefix produced during training.")
+    parser.add_argument("--epochs", nargs='+', type=int, default=[2000, 2200, 2300, 2500, 2600, 2900, 3000, 3300], help="Epoch identifiers to evaluate.")
+    parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR), help="Directory to save validation prediction pickles.")
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    args = parse_args()
+    run_validation(
+        data_dir=Path(args.data_dir),
+        model_dir=Path(args.model_dir),
+        output_dir=Path(args.output_dir),
+        epochs=args.epochs,
+        model_prefix=args.model_prefix,
+    )

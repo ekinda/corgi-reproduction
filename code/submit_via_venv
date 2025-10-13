@@ -1,0 +1,5 @@
+. /home/aksu/my_sandbox/bin/activate
+
+python -u -Wi "$@"
+
+#python -u -Wi /project/deeprna/scripts/raven_backup_2025-02-14/GRT/trainer_NONdistributed_gnomad_synced.py
