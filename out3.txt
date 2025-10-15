@@ -1,0 +1,217 @@
+
+==> Post-processing (gene-level aggregates)
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/gene_level_correlations_crosscell.py
+Found 34 tissue-experiment pairs.
+Processing: tissue 46, experiment rna_total, model grt
+0.712 0.852 0.878
+Processing: tissue 47, experiment rna_polya, model grt
+0.875 0.883 0.9
+Processing: tissue 47, experiment rna_total, model grt
+0.882 0.86 0.879
+Processing: tissue 49, experiment rna_total, model grt
+0.855 0.842 0.851
+Processing: tissue 50, experiment rna_total, model grt
+0.781 0.856 0.876
+Processing: tissue 54, experiment rna_polya, model grt
+0.927 0.864 0.879
+Processing: tissue 105, experiment rna_total, model grt
+0.905 0.865 0.885
+Processing: tissue 159, experiment rna_polya, model grt
+0.895 0.864 0.852
+Processing: tissue 159, experiment rna_total, model grt
+0.949 0.877 0.877
+Processing: tissue 160, experiment rna_polya, model grt
+0.839 0.861 0.851
+Processing: tissue 160, experiment rna_total, model grt
+0.913 0.878 0.881
+Processing: tissue 161, experiment rna_polya, model grt
+0.778 0.85 0.843
+Processing: tissue 161, experiment rna_total, model grt
+0.867 0.864 0.867
+Processing: tissue 174, experiment rna_total, model grt
+0.938 0.869 0.851
+Processing: tissue 202, experiment rna_total, model grt
+0.836 0.866 0.89
+Processing: tissue 203, experiment rna_polya, model grt
+0.906 0.879 0.876
+Processing: tissue 211, experiment rna_total, model grt
+0.771 0.859 0.89
+Processing: tissue 212, experiment rna_total, model grt
+0.894 0.858 0.866
+Processing: tissue 213, experiment rna_total, model grt
+0.88 0.858 0.854
+Processing: tissue 214, experiment rna_total, model grt
+0.918 0.863 0.882
+Processing: tissue 239, experiment rna_total, model grt
+0.695 0.852 0.875
+Processing: tissue 267, experiment rna_total, model grt
+0.865 0.847 0.884
+Processing: tissue 268, experiment rna_total, model grt
+0.878 0.859 0.873
+Processing: tissue 275, experiment rna_total, model grt
+0.731 0.857 0.865
+Processing: tissue 276, experiment rna_total, model grt
+0.712 0.84 0.852
+Processing: tissue 277, experiment rna_total, model grt
+0.735 0.856 0.863
+Processing: tissue 278, experiment rna_total, model grt
+0.697 0.848 0.857
+Processing: tissue 288, experiment rna_total, model grt
+0.937 0.883 0.918
+Processing: tissue 318, experiment rna_total, model grt
+0.908 0.856 0.864
+Processing: tissue 319, experiment rna_total, model grt
+0.905 0.853 0.88
+Processing: tissue 320, experiment rna_total, model grt
+0.913 0.861 0.874
+Processing: tissue 321, experiment rna_total, model grt
+0.914 0.859 0.88
+Processing: tissue 323, experiment rna_total, model grt
+0.869 0.848 0.896
+Processing: tissue 324, experiment rna_total, model grt
+0.854 0.829 0.882
+All done!
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/gene_level_correlations_crossboth.py
+Found 34 tissue-experiment pairs.
+Processing: tissue 46, experiment rna_total, model grt
+0.867 0.9 0.92
+Processing: tissue 47, experiment rna_polya, model grt
+0.827 0.932 0.938
+Processing: tissue 47, experiment rna_total, model grt
+0.866 0.897 0.918
+Processing: tissue 49, experiment rna_total, model grt
+0.845 0.872 0.894
+Processing: tissue 50, experiment rna_total, model grt
+0.865 0.898 0.915
+Processing: tissue 54, experiment rna_polya, model grt
+0.866 0.894 0.907
+Processing: tissue 105, experiment rna_total, model grt
+0.852 0.884 0.903
+Processing: tissue 159, experiment rna_polya, model grt
+0.792 0.857 0.852
+Processing: tissue 159, experiment rna_total, model grt
+0.851 0.879 0.884
+Processing: tissue 160, experiment rna_polya, model grt
+0.779 0.857 0.854
+Processing: tissue 160, experiment rna_total, model grt
+0.863 0.885 0.892
+Processing: tissue 161, experiment rna_polya, model grt
+0.769 0.856 0.856
+Processing: tissue 161, experiment rna_total, model grt
+0.854 0.888 0.896
+Processing: tissue 174, experiment rna_total, model grt
+0.83 0.86 0.857
+Processing: tissue 202, experiment rna_total, model grt
+0.871 0.911 0.931
+Processing: tissue 203, experiment rna_polya, model grt
+0.81 0.901 0.899
+Processing: tissue 211, experiment rna_total, model grt
+0.844 0.903 0.923
+Processing: tissue 212, experiment rna_total, model grt
+0.857 0.855 0.879
+Processing: tissue 213, experiment rna_total, model grt
+0.846 0.861 0.875
+Processing: tissue 214, experiment rna_total, model grt
+0.866 0.875 0.904
+Processing: tissue 239, experiment rna_total, model grt
+0.837 0.872 0.899
+Processing: tissue 267, experiment rna_total, model grt
+0.866 0.907 0.929
+Processing: tissue 268, experiment rna_total, model grt
+0.863 0.851 0.885
+Processing: tissue 275, experiment rna_total, model grt
+0.758 0.879 0.891
+Processing: tissue 276, experiment rna_total, model grt
+0.768 0.857 0.88
+Processing: tissue 277, experiment rna_total, model grt
+0.778 0.869 0.887
+Processing: tissue 278, experiment rna_total, model grt
+0.773 0.865 0.882
+Processing: tissue 288, experiment rna_total, model grt
+0.891 0.934 0.949
+Processing: tissue 318, experiment rna_total, model grt
+0.864 0.872 0.893
+Processing: tissue 319, experiment rna_total, model grt
+0.886 0.871 0.901
+Processing: tissue 320, experiment rna_total, model grt
+0.874 0.882 0.903
+Processing: tissue 321, experiment rna_total, model grt
+0.872 0.874 0.901
+Processing: tissue 323, experiment rna_total, model grt
+0.856 0.935 0.943
+Processing: tissue 324, experiment rna_total, model grt
+0.856 0.927 0.936
+All done!
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/gene_level_correlations_crosssequence.py
+Found 33 tissue-experiment pairs.
+Processing: tissue 4, experiment rna_polya, model grt
+0.804 0.879 0.868
+Processing: tissue 23, experiment rna_polya, model grt
+0.785 0.884 0.878
+Processing: tissue 34, experiment rna_polya, model grt
+0.782 0.902 0.909
+Processing: tissue 43, experiment rna_total, model grt
+0.85 0.862 0.868
+Processing: tissue 57, experiment rna_polya, model grt
+0.807 0.898 0.898
+Processing: tissue 57, experiment rna_total, model grt
+0.84 0.868 0.884
+Processing: tissue 59, experiment rna_polya, model grt
+0.842 0.842 0.852
+Processing: tissue 59, experiment rna_total, model grt
+0.849 0.868 0.887
+Processing: tissue 69, experiment rna_total, model grt
+0.817 0.887 0.897
+Processing: tissue 78, experiment rna_total, model grt
+0.864 0.854 0.876
+Processing: tissue 93, experiment rna_polya, model grt
+0.768 0.861 0.854
+Processing: tissue 118, experiment rna_total, model grt
+0.851 0.914 0.934
+Processing: tissue 119, experiment rna_total, model grt
+0.854 0.915 0.935
+Processing: tissue 147, experiment rna_total, model grt
+0.877 0.888 0.912
+Processing: tissue 167, experiment rna_total, model grt
+0.573 0.848 0.827
+Processing: tissue 169, experiment rna_total, model grt
+0.779 0.869 0.861
+Processing: tissue 170, experiment rna_total, model grt
+0.819 0.883 0.904
+Processing: tissue 178, experiment rna_total, model grt
+0.828 0.874 0.89
+Processing: tissue 181, experiment rna_total, model grt
+0.798 0.873 0.876
+Processing: tissue 199, experiment rna_total, model grt
+0.808 0.905 0.921
+Processing: tissue 245, experiment rna_total, model grt
+0.848 0.885 0.907
+Processing: tissue 249, experiment rna_total, model grt
+0.854 0.872 0.889
+Processing: tissue 257, experiment rna_polya, model grt
+0.772 0.908 0.924
+Processing: tissue 262, experiment rna_total, model grt
+0.445 0.893 0.914
+Processing: tissue 274, experiment rna_polya, model grt
+0.757 0.903 0.916
+Processing: tissue 281, experiment rna_polya, model grt
+0.744 0.878 0.862
+Processing: tissue 294, experiment rna_polya, model grt
+0.894 0.942 0.955
+Processing: tissue 294, experiment rna_total, model grt
+0.901 0.948 0.96
+Processing: tissue 295, experiment rna_polya, model grt
+0.824 0.898 0.896
+Processing: tissue 352, experiment rna_total, model grt
+0.786 0.825 0.836
+Processing: tissue 356, experiment rna_total, model grt
+0.848 0.867 0.887
+Processing: tissue 372, experiment rna_total, model grt
+0.847 0.915 0.936
+Processing: tissue 390, experiment rna_total, model grt
+0.846 0.914 0.935
+All done!
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/gene_level_correlations_fixed.py
+[cross_both] Saved 34 correlations (mean r=0.884) to /project/deeprna_data/corgi-reproduction/processed_data/figure2/gene_level_cross_both/correlations_fixed.pk.
+[cross_celltype] Saved 34 correlations (mean r=0.859) to /project/deeprna_data/corgi-reproduction/processed_data/figure2/gene_level_cross_celltype/correlations_fixed.pk.
+[cross_region] Saved 33 correlations (mean r=0.885) to /project/deeprna_data/corgi-reproduction/processed_data/figure2/gene_level_cross_region/correlations_fixed.pk.

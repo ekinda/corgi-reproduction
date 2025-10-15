@@ -1,0 +1,451 @@
+[2025-10-15 16:21:48,836] INFO: Using device: cuda
+[2025-10-15 16:21:48,856] INFO: Loaded 135 rows from grt-vs-borzoi CSV.
+[2025-10-15 16:21:48,868] INFO: Parsed 138 regions from BED file.
+[2025-10-15 16:21:48,868] INFO: Generated 1191 prediction tiles.
+/project/deeprna_data/corgi-reproduction/code/bench_grt_borzoi.py:101: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  ckpt = torch.load(GRT_CHECKPOINT, map_location=device)
+[2025-10-15 16:22:16,146] INFO: GRT model loaded from /project/deeprna_data/corgi-reproduction/data/corgi_model.pt, Borzoi 4 model ensemble loaded.
+[2025-10-15 16:22:16,151] INFO: Loaded TF expression from /project/deeprna_data/corgi-reproduction/data/tf_expression.npy
+[2025-10-15 16:22:16,152] INFO: Beginning Borzoi calculations.
+/home/aksu/my_sandbox/lib/python3.11/site-packages/borzoi_pytorch/pytorch_borzoi_model.py:247: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+[2025-10-15 17:03:21,551] INFO: Borzoi done.
+[2025-10-15 17:03:21,572] INFO: Processing Tissue 57 with 15 channels.
+[2025-10-15 17:11:55,327] INFO: Processing Tissue 59 with 16 channels.
+[2025-10-15 17:20:41,610] INFO: Processing Tissue 79 with 12 channels.
+[2025-10-15 17:28:28,227] INFO: Processing Tissue 145 with 9 channels.
+[2025-10-15 17:35:18,933] INFO: Processing Tissue 176 with 9 channels.
+[2025-10-15 17:42:09,622] INFO: Processing Tissue 297 with 8 channels.
+[2025-10-15 17:48:44,900] INFO: Processing Tissue 325 with 9 channels.
+[2025-10-15 17:55:33,569] INFO: Processing Tissue 329 with 9 channels.
+[2025-10-15 18:02:22,748] INFO: Processing Tissue 346 with 10 channels.
+[2025-10-15 18:09:30,173] INFO: Processing Tissue 355 with 8 channels.
+[2025-10-15 18:15:56,124] INFO: Processing Tissue 404 with 1 channels.
+[2025-10-15 18:20:24,832] INFO: Processing Tissue 413 with 1 channels.
+[2025-10-15 18:24:53,408] INFO: Processing Tissue 420 with 1 channels.
+[2025-10-15 18:29:21,978] INFO: Processing Tissue 431 with 1 channels.
+[2025-10-15 18:33:50,557] INFO: Processing Tissue 432 with 1 channels.
+[2025-10-15 18:38:19,310] INFO: Processing Tissue 433 with 1 channels.
+[2025-10-15 18:42:48,031] INFO: Processing Tissue 435 with 1 channels.
+[2025-10-15 18:47:16,866] INFO: Processing Tissue 439 with 1 channels.
+[2025-10-15 18:51:45,539] INFO: Processing Tissue 454 with 1 channels.
+[2025-10-15 18:56:14,313] INFO: Processing Tissue 456 with 1 channels.
+[2025-10-15 19:00:43,003] INFO: Processing Tissue 487 with 2 channels.
+[2025-10-15 19:05:25,064] INFO: Processing Tissue 512 with 2 channels.
+[2025-10-15 19:10:07,050] INFO: Processing Tissue 523 with 2 channels.
+[2025-10-15 19:14:49,057] INFO: Processing Tissue 544 with 2 channels.
+[2025-10-15 19:19:31,106] INFO: Processing Tissue 547 with 2 channels.
+[2025-10-15 19:24:13,501] INFO: Processing Tissue 548 with 2 channels.
+[2025-10-15 19:28:55,744] INFO: Processing Tissue 564 with 2 channels.
+[2025-10-15 19:33:38,503] INFO: Processing Tissue 565 with 2 channels.
+[2025-10-15 19:38:21,251] INFO: Processing Tissue 580 with 2 channels.
+[2025-10-15 19:43:03,795] INFO: Processing Tissue 581 with 2 channels.
+/home/aksu/my_sandbox/lib/python3.11/site-packages/numpy/core/_methods.py:152: RuntimeWarning: overflow encountered in reduce
+  arrmean = umr_sum(arr, axis, dtype, keepdims=True, where=where)
+[2025-10-15 19:50:55,240] INFO: Correlation results written to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/correlation_results.csv
+[2025-10-15 19:50:55,414] INFO: Notebook copy written to /project/deeprna_data/corgi-reproduction/notebook_data/figure3/correlation_results.csv
+[2025-10-15 19:51:03,398] INFO: Exported corgi BigWig for tissue 57, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_ctcf_corgi.bw
+[2025-10-15 19:51:09,937] INFO: Exported corgi BigWig for tissue 57, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_dnase_corgi.bw
+[2025-10-15 19:51:16,394] INFO: Exported corgi BigWig for tissue 57, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k27ac_corgi.bw
+[2025-10-15 19:51:22,734] INFO: Exported corgi BigWig for tissue 57, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k27me3_corgi.bw
+[2025-10-15 19:51:29,294] INFO: Exported corgi BigWig for tissue 57, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k36me3_corgi.bw
+[2025-10-15 19:51:35,829] INFO: Exported corgi BigWig for tissue 57, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me1_corgi.bw
+[2025-10-15 19:51:42,282] INFO: Exported corgi BigWig for tissue 57, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me2_corgi.bw
+[2025-10-15 19:51:48,700] INFO: Exported corgi BigWig for tissue 57, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me3_corgi.bw
+[2025-10-15 19:51:55,121] INFO: Exported corgi BigWig for tissue 57, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k79me2_corgi.bw
+[2025-10-15 19:52:01,492] INFO: Exported corgi BigWig for tissue 57, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k9ac_corgi.bw
+[2025-10-15 19:52:07,883] INFO: Exported corgi BigWig for tissue 57, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k9me3_corgi.bw
+[2025-10-15 19:52:14,673] INFO: Exported corgi BigWig for tissue 57, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_polya_minus_corgi.bw
+[2025-10-15 19:52:21,430] INFO: Exported corgi BigWig for tissue 57, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_polya_plus_corgi.bw
+[2025-10-15 19:52:28,307] INFO: Exported corgi BigWig for tissue 57, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_total_minus_corgi.bw
+[2025-10-15 19:52:35,068] INFO: Exported corgi BigWig for tissue 57, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_total_plus_corgi.bw
+[2025-10-15 19:52:41,157] INFO: Exported corgi BigWig for tissue 59, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_cage_minus_corgi.bw
+[2025-10-15 19:52:47,235] INFO: Exported corgi BigWig for tissue 59, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_cage_plus_corgi.bw
+[2025-10-15 19:52:53,621] INFO: Exported corgi BigWig for tissue 59, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_ctcf_corgi.bw
+[2025-10-15 19:53:00,216] INFO: Exported corgi BigWig for tissue 59, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_dnase_corgi.bw
+[2025-10-15 19:53:06,626] INFO: Exported corgi BigWig for tissue 59, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k27me3_corgi.bw
+[2025-10-15 19:53:12,857] INFO: Exported corgi BigWig for tissue 59, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k36me3_corgi.bw
+[2025-10-15 19:53:19,148] INFO: Exported corgi BigWig for tissue 59, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me1_corgi.bw
+[2025-10-15 19:53:25,604] INFO: Exported corgi BigWig for tissue 59, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me2_corgi.bw
+[2025-10-15 19:53:31,948] INFO: Exported corgi BigWig for tissue 59, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me3_corgi.bw
+[2025-10-15 19:53:38,343] INFO: Exported corgi BigWig for tissue 59, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k79me2_corgi.bw
+[2025-10-15 19:53:44,665] INFO: Exported corgi BigWig for tissue 59, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k9ac_corgi.bw
+[2025-10-15 19:53:51,173] INFO: Exported corgi BigWig for tissue 59, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k9me3_corgi.bw
+[2025-10-15 19:53:57,903] INFO: Exported corgi BigWig for tissue 59, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_polya_minus_corgi.bw
+[2025-10-15 19:54:04,626] INFO: Exported corgi BigWig for tissue 59, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_polya_plus_corgi.bw
+[2025-10-15 19:54:11,205] INFO: Exported corgi BigWig for tissue 59, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_total_minus_corgi.bw
+[2025-10-15 19:54:17,939] INFO: Exported corgi BigWig for tissue 59, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_total_plus_corgi.bw
+[2025-10-15 19:54:24,273] INFO: Exported corgi BigWig for tissue 79, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_ctcf_corgi.bw
+[2025-10-15 19:54:30,578] INFO: Exported corgi BigWig for tissue 79, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k27ac_corgi.bw
+[2025-10-15 19:54:37,031] INFO: Exported corgi BigWig for tissue 79, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k27me3_corgi.bw
+[2025-10-15 19:54:43,451] INFO: Exported corgi BigWig for tissue 79, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k36me3_corgi.bw
+[2025-10-15 19:54:49,799] INFO: Exported corgi BigWig for tissue 79, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me1_corgi.bw
+[2025-10-15 19:54:56,221] INFO: Exported corgi BigWig for tissue 79, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me2_corgi.bw
+[2025-10-15 19:55:02,588] INFO: Exported corgi BigWig for tissue 79, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me3_corgi.bw
+[2025-10-15 19:55:08,884] INFO: Exported corgi BigWig for tissue 79, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k79me2_corgi.bw
+[2025-10-15 19:55:15,187] INFO: Exported corgi BigWig for tissue 79, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k9ac_corgi.bw
+[2025-10-15 19:55:21,607] INFO: Exported corgi BigWig for tissue 79, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k9me3_corgi.bw
+[2025-10-15 19:55:28,321] INFO: Exported corgi BigWig for tissue 79, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_rna_polya_minus_corgi.bw
+[2025-10-15 19:55:35,045] INFO: Exported corgi BigWig for tissue 79, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_rna_polya_plus_corgi.bw
+[2025-10-15 19:55:41,351] INFO: Exported corgi BigWig for tissue 145, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_ctcf_corgi.bw
+[2025-10-15 19:55:47,787] INFO: Exported corgi BigWig for tissue 145, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k27ac_corgi.bw
+[2025-10-15 19:55:54,556] INFO: Exported corgi BigWig for tissue 145, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k27me3_corgi.bw
+[2025-10-15 19:56:00,921] INFO: Exported corgi BigWig for tissue 145, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k36me3_corgi.bw
+[2025-10-15 19:56:07,207] INFO: Exported corgi BigWig for tissue 145, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k4me1_corgi.bw
+[2025-10-15 19:56:13,582] INFO: Exported corgi BigWig for tissue 145, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k4me3_corgi.bw
+[2025-10-15 19:56:20,037] INFO: Exported corgi BigWig for tissue 145, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k9me3_corgi.bw
+[2025-10-15 19:56:26,690] INFO: Exported corgi BigWig for tissue 145, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_rna_total_minus_corgi.bw
+[2025-10-15 19:56:33,167] INFO: Exported corgi BigWig for tissue 145, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_rna_total_plus_corgi.bw
+[2025-10-15 19:56:39,542] INFO: Exported corgi BigWig for tissue 176, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_ctcf_corgi.bw
+[2025-10-15 19:56:46,014] INFO: Exported corgi BigWig for tissue 176, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k27ac_corgi.bw
+[2025-10-15 19:56:52,379] INFO: Exported corgi BigWig for tissue 176, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k27me3_corgi.bw
+[2025-10-15 19:56:58,752] INFO: Exported corgi BigWig for tissue 176, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k36me3_corgi.bw
+[2025-10-15 19:57:04,975] INFO: Exported corgi BigWig for tissue 176, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k4me1_corgi.bw
+[2025-10-15 19:57:11,361] INFO: Exported corgi BigWig for tissue 176, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k4me3_corgi.bw
+[2025-10-15 19:57:17,743] INFO: Exported corgi BigWig for tissue 176, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k9me3_corgi.bw
+[2025-10-15 19:57:24,341] INFO: Exported corgi BigWig for tissue 176, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_rna_total_minus_corgi.bw
+[2025-10-15 19:57:30,868] INFO: Exported corgi BigWig for tissue 176, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_rna_total_plus_corgi.bw
+[2025-10-15 19:57:37,200] INFO: Exported corgi BigWig for tissue 297, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_ctcf_corgi.bw
+[2025-10-15 19:57:43,619] INFO: Exported corgi BigWig for tissue 297, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k27ac_corgi.bw
+[2025-10-15 19:57:49,905] INFO: Exported corgi BigWig for tissue 297, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k27me3_corgi.bw
+[2025-10-15 19:57:56,162] INFO: Exported corgi BigWig for tissue 297, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k4me1_corgi.bw
+[2025-10-15 19:58:02,502] INFO: Exported corgi BigWig for tissue 297, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k4me3_corgi.bw
+[2025-10-15 19:58:08,812] INFO: Exported corgi BigWig for tissue 297, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k9me3_corgi.bw
+[2025-10-15 19:58:15,686] INFO: Exported corgi BigWig for tissue 297, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_rna_total_minus_corgi.bw
+[2025-10-15 19:58:22,280] INFO: Exported corgi BigWig for tissue 297, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_rna_total_plus_corgi.bw
+[2025-10-15 19:58:28,632] INFO: Exported corgi BigWig for tissue 325, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_ctcf_corgi.bw
+[2025-10-15 19:58:34,924] INFO: Exported corgi BigWig for tissue 325, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k27ac_corgi.bw
+[2025-10-15 19:58:41,362] INFO: Exported corgi BigWig for tissue 325, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k27me3_corgi.bw
+[2025-10-15 19:58:47,740] INFO: Exported corgi BigWig for tissue 325, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k36me3_corgi.bw
+[2025-10-15 19:58:54,052] INFO: Exported corgi BigWig for tissue 325, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k4me1_corgi.bw
+[2025-10-15 19:59:00,357] INFO: Exported corgi BigWig for tissue 325, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k4me3_corgi.bw
+[2025-10-15 19:59:06,672] INFO: Exported corgi BigWig for tissue 325, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k9me3_corgi.bw
+[2025-10-15 19:59:13,455] INFO: Exported corgi BigWig for tissue 325, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_rna_total_minus_corgi.bw
+[2025-10-15 19:59:20,269] INFO: Exported corgi BigWig for tissue 325, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_rna_total_plus_corgi.bw
+[2025-10-15 19:59:26,650] INFO: Exported corgi BigWig for tissue 329, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_ctcf_corgi.bw
+[2025-10-15 19:59:33,186] INFO: Exported corgi BigWig for tissue 329, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_dnase_corgi.bw
+[2025-10-15 19:59:39,615] INFO: Exported corgi BigWig for tissue 329, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k27ac_corgi.bw
+[2025-10-15 19:59:45,999] INFO: Exported corgi BigWig for tissue 329, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k27me3_corgi.bw
+[2025-10-15 19:59:52,326] INFO: Exported corgi BigWig for tissue 329, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k36me3_corgi.bw
+[2025-10-15 19:59:58,852] INFO: Exported corgi BigWig for tissue 329, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k4me1_corgi.bw
+[2025-10-15 20:00:05,108] INFO: Exported corgi BigWig for tissue 329, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k9me3_corgi.bw
+[2025-10-15 20:00:11,917] INFO: Exported corgi BigWig for tissue 329, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_rna_total_minus_corgi.bw
+[2025-10-15 20:00:18,657] INFO: Exported corgi BigWig for tissue 329, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_rna_total_plus_corgi.bw
+[2025-10-15 20:00:25,022] INFO: Exported corgi BigWig for tissue 346, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_ctcf_corgi.bw
+[2025-10-15 20:00:31,654] INFO: Exported corgi BigWig for tissue 346, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_dnase_corgi.bw
+[2025-10-15 20:00:38,066] INFO: Exported corgi BigWig for tissue 346, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k27ac_corgi.bw
+[2025-10-15 20:00:44,514] INFO: Exported corgi BigWig for tissue 346, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k27me3_corgi.bw
+[2025-10-15 20:00:50,824] INFO: Exported corgi BigWig for tissue 346, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k36me3_corgi.bw
+[2025-10-15 20:00:57,220] INFO: Exported corgi BigWig for tissue 346, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k4me1_corgi.bw
+[2025-10-15 20:01:03,518] INFO: Exported corgi BigWig for tissue 346, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k4me3_corgi.bw
+[2025-10-15 20:01:09,858] INFO: Exported corgi BigWig for tissue 346, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k9me3_corgi.bw
+[2025-10-15 20:01:16,498] INFO: Exported corgi BigWig for tissue 346, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_rna_total_minus_corgi.bw
+[2025-10-15 20:01:23,165] INFO: Exported corgi BigWig for tissue 346, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_rna_total_plus_corgi.bw
+[2025-10-15 20:01:29,184] INFO: Exported corgi BigWig for tissue 355, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_cage_minus_corgi.bw
+[2025-10-15 20:01:35,279] INFO: Exported corgi BigWig for tissue 355, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_cage_plus_corgi.bw
+[2025-10-15 20:01:41,606] INFO: Exported corgi BigWig for tissue 355, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_ctcf_corgi.bw
+[2025-10-15 20:01:47,980] INFO: Exported corgi BigWig for tissue 355, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k27ac_corgi.bw
+[2025-10-15 20:01:54,299] INFO: Exported corgi BigWig for tissue 355, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k36me3_corgi.bw
+[2025-10-15 20:02:00,556] INFO: Exported corgi BigWig for tissue 355, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k4me3_corgi.bw
+[2025-10-15 20:02:07,254] INFO: Exported corgi BigWig for tissue 355, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_rna_total_minus_corgi.bw
+[2025-10-15 20:02:13,906] INFO: Exported corgi BigWig for tissue 355, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_rna_total_plus_corgi.bw
+[2025-10-15 20:02:20,413] INFO: Exported corgi BigWig for tissue 404, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue404_atac_corgi.bw
+[2025-10-15 20:02:26,829] INFO: Exported corgi BigWig for tissue 413, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue413_atac_corgi.bw
+[2025-10-15 20:02:33,134] INFO: Exported corgi BigWig for tissue 420, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue420_atac_corgi.bw
+[2025-10-15 20:02:39,525] INFO: Exported corgi BigWig for tissue 431, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue431_atac_corgi.bw
+[2025-10-15 20:02:45,965] INFO: Exported corgi BigWig for tissue 432, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue432_atac_corgi.bw
+[2025-10-15 20:02:52,363] INFO: Exported corgi BigWig for tissue 433, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue433_atac_corgi.bw
+[2025-10-15 20:02:58,629] INFO: Exported corgi BigWig for tissue 435, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue435_atac_corgi.bw
+[2025-10-15 20:03:04,948] INFO: Exported corgi BigWig for tissue 439, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue439_atac_corgi.bw
+[2025-10-15 20:03:11,401] INFO: Exported corgi BigWig for tissue 454, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue454_atac_corgi.bw
+[2025-10-15 20:03:17,707] INFO: Exported corgi BigWig for tissue 456, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue456_atac_corgi.bw
+[2025-10-15 20:03:24,631] INFO: Exported corgi BigWig for tissue 487, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue487_cage_minus_corgi.bw
+[2025-10-15 20:03:31,571] INFO: Exported corgi BigWig for tissue 487, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue487_cage_plus_corgi.bw
+[2025-10-15 20:03:37,594] INFO: Exported corgi BigWig for tissue 512, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue512_cage_minus_corgi.bw
+[2025-10-15 20:03:43,580] INFO: Exported corgi BigWig for tissue 512, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue512_cage_plus_corgi.bw
+[2025-10-15 20:03:49,933] INFO: Exported corgi BigWig for tissue 523, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue523_cage_minus_corgi.bw
+[2025-10-15 20:03:56,397] INFO: Exported corgi BigWig for tissue 523, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue523_cage_plus_corgi.bw
+[2025-10-15 20:04:02,898] INFO: Exported corgi BigWig for tissue 544, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue544_cage_minus_corgi.bw
+[2025-10-15 20:04:09,203] INFO: Exported corgi BigWig for tissue 544, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue544_cage_plus_corgi.bw
+[2025-10-15 20:04:15,985] INFO: Exported corgi BigWig for tissue 547, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue547_cage_minus_corgi.bw
+[2025-10-15 20:04:22,669] INFO: Exported corgi BigWig for tissue 547, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue547_cage_plus_corgi.bw
+[2025-10-15 20:04:29,123] INFO: Exported corgi BigWig for tissue 548, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue548_cage_minus_corgi.bw
+[2025-10-15 20:04:35,549] INFO: Exported corgi BigWig for tissue 548, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue548_cage_plus_corgi.bw
+[2025-10-15 20:04:42,197] INFO: Exported corgi BigWig for tissue 564, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue564_cage_minus_corgi.bw
+[2025-10-15 20:04:49,034] INFO: Exported corgi BigWig for tissue 564, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue564_cage_plus_corgi.bw
+[2025-10-15 20:04:54,982] INFO: Exported corgi BigWig for tissue 565, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue565_cage_minus_corgi.bw
+[2025-10-15 20:05:00,959] INFO: Exported corgi BigWig for tissue 565, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue565_cage_plus_corgi.bw
+[2025-10-15 20:05:06,941] INFO: Exported corgi BigWig for tissue 580, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue580_cage_minus_corgi.bw
+[2025-10-15 20:05:12,986] INFO: Exported corgi BigWig for tissue 580, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue580_cage_plus_corgi.bw
+[2025-10-15 20:05:19,413] INFO: Exported corgi BigWig for tissue 581, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue581_cage_minus_corgi.bw
+[2025-10-15 20:05:25,875] INFO: Exported corgi BigWig for tissue 581, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue581_cage_plus_corgi.bw
+[2025-10-15 20:05:32,285] INFO: Exported borzoi BigWig for tissue 57, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_ctcf_borzoi.bw
+[2025-10-15 20:05:38,913] INFO: Exported borzoi BigWig for tissue 57, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_dnase_borzoi.bw
+[2025-10-15 20:05:45,270] INFO: Exported borzoi BigWig for tissue 57, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k27ac_borzoi.bw
+[2025-10-15 20:05:51,629] INFO: Exported borzoi BigWig for tissue 57, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k27me3_borzoi.bw
+[2025-10-15 20:05:57,970] INFO: Exported borzoi BigWig for tissue 57, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k36me3_borzoi.bw
+[2025-10-15 20:06:04,301] INFO: Exported borzoi BigWig for tissue 57, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me1_borzoi.bw
+[2025-10-15 20:06:10,562] INFO: Exported borzoi BigWig for tissue 57, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me2_borzoi.bw
+[2025-10-15 20:06:16,931] INFO: Exported borzoi BigWig for tissue 57, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me3_borzoi.bw
+[2025-10-15 20:06:23,198] INFO: Exported borzoi BigWig for tissue 57, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k79me2_borzoi.bw
+[2025-10-15 20:06:29,512] INFO: Exported borzoi BigWig for tissue 57, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k9ac_borzoi.bw
+[2025-10-15 20:06:35,894] INFO: Exported borzoi BigWig for tissue 57, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k9me3_borzoi.bw
+[2025-10-15 20:06:42,442] INFO: Exported borzoi BigWig for tissue 57, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_polya_minus_borzoi.bw
+[2025-10-15 20:06:48,832] INFO: Exported borzoi BigWig for tissue 57, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_polya_plus_borzoi.bw
+[2025-10-15 20:06:55,434] INFO: Exported borzoi BigWig for tissue 57, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_total_minus_borzoi.bw
+[2025-10-15 20:07:02,132] INFO: Exported borzoi BigWig for tissue 57, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_total_plus_borzoi.bw
+[2025-10-15 20:07:09,235] INFO: Exported borzoi BigWig for tissue 59, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_cage_minus_borzoi.bw
+[2025-10-15 20:07:16,337] INFO: Exported borzoi BigWig for tissue 59, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_cage_plus_borzoi.bw
+[2025-10-15 20:07:22,707] INFO: Exported borzoi BigWig for tissue 59, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_ctcf_borzoi.bw
+[2025-10-15 20:07:29,308] INFO: Exported borzoi BigWig for tissue 59, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_dnase_borzoi.bw
+[2025-10-15 20:07:35,656] INFO: Exported borzoi BigWig for tissue 59, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k27me3_borzoi.bw
+[2025-10-15 20:07:42,077] INFO: Exported borzoi BigWig for tissue 59, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k36me3_borzoi.bw
+[2025-10-15 20:07:48,537] INFO: Exported borzoi BigWig for tissue 59, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me1_borzoi.bw
+[2025-10-15 20:07:54,857] INFO: Exported borzoi BigWig for tissue 59, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me2_borzoi.bw
+[2025-10-15 20:08:01,200] INFO: Exported borzoi BigWig for tissue 59, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me3_borzoi.bw
+[2025-10-15 20:08:07,686] INFO: Exported borzoi BigWig for tissue 59, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k79me2_borzoi.bw
+[2025-10-15 20:08:13,963] INFO: Exported borzoi BigWig for tissue 59, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k9ac_borzoi.bw
+[2025-10-15 20:08:20,467] INFO: Exported borzoi BigWig for tissue 59, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k9me3_borzoi.bw
+[2025-10-15 20:08:27,093] INFO: Exported borzoi BigWig for tissue 59, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_polya_minus_borzoi.bw
+[2025-10-15 20:08:33,763] INFO: Exported borzoi BigWig for tissue 59, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_polya_plus_borzoi.bw
+[2025-10-15 20:08:40,389] INFO: Exported borzoi BigWig for tissue 59, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_total_minus_borzoi.bw
+[2025-10-15 20:08:47,046] INFO: Exported borzoi BigWig for tissue 59, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_total_plus_borzoi.bw
+[2025-10-15 20:08:53,495] INFO: Exported borzoi BigWig for tissue 79, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_ctcf_borzoi.bw
+[2025-10-15 20:08:59,901] INFO: Exported borzoi BigWig for tissue 79, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k27ac_borzoi.bw
+[2025-10-15 20:09:06,397] INFO: Exported borzoi BigWig for tissue 79, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k27me3_borzoi.bw
+[2025-10-15 20:09:12,970] INFO: Exported borzoi BigWig for tissue 79, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k36me3_borzoi.bw
+[2025-10-15 20:09:19,308] INFO: Exported borzoi BigWig for tissue 79, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me1_borzoi.bw
+[2025-10-15 20:09:25,782] INFO: Exported borzoi BigWig for tissue 79, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me2_borzoi.bw
+[2025-10-15 20:09:32,023] INFO: Exported borzoi BigWig for tissue 79, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me3_borzoi.bw
+[2025-10-15 20:09:38,384] INFO: Exported borzoi BigWig for tissue 79, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k79me2_borzoi.bw
+[2025-10-15 20:09:44,907] INFO: Exported borzoi BigWig for tissue 79, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k9ac_borzoi.bw
+[2025-10-15 20:09:51,325] INFO: Exported borzoi BigWig for tissue 79, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k9me3_borzoi.bw
+[2025-10-15 20:09:57,725] INFO: Exported borzoi BigWig for tissue 79, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_rna_polya_minus_borzoi.bw
+[2025-10-15 20:10:04,098] INFO: Exported borzoi BigWig for tissue 79, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_rna_polya_plus_borzoi.bw
+[2025-10-15 20:10:10,603] INFO: Exported borzoi BigWig for tissue 145, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_ctcf_borzoi.bw
+[2025-10-15 20:10:16,982] INFO: Exported borzoi BigWig for tissue 145, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k27ac_borzoi.bw
+[2025-10-15 20:10:23,327] INFO: Exported borzoi BigWig for tissue 145, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k27me3_borzoi.bw
+[2025-10-15 20:10:29,688] INFO: Exported borzoi BigWig for tissue 145, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k36me3_borzoi.bw
+[2025-10-15 20:10:36,169] INFO: Exported borzoi BigWig for tissue 145, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k4me1_borzoi.bw
+[2025-10-15 20:10:42,947] INFO: Exported borzoi BigWig for tissue 145, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k4me3_borzoi.bw
+[2025-10-15 20:10:49,295] INFO: Exported borzoi BigWig for tissue 145, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k9me3_borzoi.bw
+[2025-10-15 20:10:55,869] INFO: Exported borzoi BigWig for tissue 145, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_rna_total_minus_borzoi.bw
+[2025-10-15 20:11:02,325] INFO: Exported borzoi BigWig for tissue 145, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_rna_total_plus_borzoi.bw
+[2025-10-15 20:11:08,755] INFO: Exported borzoi BigWig for tissue 176, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_ctcf_borzoi.bw
+[2025-10-15 20:11:15,028] INFO: Exported borzoi BigWig for tissue 176, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k27ac_borzoi.bw
+[2025-10-15 20:11:21,525] INFO: Exported borzoi BigWig for tissue 176, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k27me3_borzoi.bw
+[2025-10-15 20:11:27,919] INFO: Exported borzoi BigWig for tissue 176, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k36me3_borzoi.bw
+[2025-10-15 20:11:34,309] INFO: Exported borzoi BigWig for tissue 176, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k4me1_borzoi.bw
+[2025-10-15 20:11:40,680] INFO: Exported borzoi BigWig for tissue 176, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k4me3_borzoi.bw
+[2025-10-15 20:11:47,122] INFO: Exported borzoi BigWig for tissue 176, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k9me3_borzoi.bw
+[2025-10-15 20:11:53,530] INFO: Exported borzoi BigWig for tissue 176, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_rna_total_minus_borzoi.bw
+[2025-10-15 20:11:59,904] INFO: Exported borzoi BigWig for tissue 176, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_rna_total_plus_borzoi.bw
+[2025-10-15 20:12:06,336] INFO: Exported borzoi BigWig for tissue 297, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_ctcf_borzoi.bw
+[2025-10-15 20:12:12,624] INFO: Exported borzoi BigWig for tissue 297, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k27ac_borzoi.bw
+[2025-10-15 20:12:18,989] INFO: Exported borzoi BigWig for tissue 297, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k27me3_borzoi.bw
+[2025-10-15 20:12:25,390] INFO: Exported borzoi BigWig for tissue 297, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k4me1_borzoi.bw
+[2025-10-15 20:12:31,694] INFO: Exported borzoi BigWig for tissue 297, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k4me3_borzoi.bw
+[2025-10-15 20:12:38,034] INFO: Exported borzoi BigWig for tissue 297, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k9me3_borzoi.bw
+[2025-10-15 20:12:44,818] INFO: Exported borzoi BigWig for tissue 297, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_rna_total_minus_borzoi.bw
+[2025-10-15 20:12:51,497] INFO: Exported borzoi BigWig for tissue 297, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_rna_total_plus_borzoi.bw
+[2025-10-15 20:12:57,814] INFO: Exported borzoi BigWig for tissue 325, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_ctcf_borzoi.bw
+[2025-10-15 20:13:04,261] INFO: Exported borzoi BigWig for tissue 325, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k27ac_borzoi.bw
+[2025-10-15 20:13:10,551] INFO: Exported borzoi BigWig for tissue 325, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k27me3_borzoi.bw
+[2025-10-15 20:13:16,935] INFO: Exported borzoi BigWig for tissue 325, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k36me3_borzoi.bw
+[2025-10-15 20:13:23,273] INFO: Exported borzoi BigWig for tissue 325, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k4me1_borzoi.bw
+[2025-10-15 20:13:29,721] INFO: Exported borzoi BigWig for tissue 325, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k4me3_borzoi.bw
+[2025-10-15 20:13:36,046] INFO: Exported borzoi BigWig for tissue 325, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k9me3_borzoi.bw
+[2025-10-15 20:13:42,675] INFO: Exported borzoi BigWig for tissue 325, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_rna_total_minus_borzoi.bw
+[2025-10-15 20:13:49,283] INFO: Exported borzoi BigWig for tissue 325, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_rna_total_plus_borzoi.bw
+[2025-10-15 20:13:55,738] INFO: Exported borzoi BigWig for tissue 329, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_ctcf_borzoi.bw
+[2025-10-15 20:14:02,195] INFO: Exported borzoi BigWig for tissue 329, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_dnase_borzoi.bw
+[2025-10-15 20:14:08,557] INFO: Exported borzoi BigWig for tissue 329, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k27ac_borzoi.bw
+[2025-10-15 20:14:15,034] INFO: Exported borzoi BigWig for tissue 329, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k27me3_borzoi.bw
+[2025-10-15 20:14:21,464] INFO: Exported borzoi BigWig for tissue 329, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k36me3_borzoi.bw
+[2025-10-15 20:14:27,960] INFO: Exported borzoi BigWig for tissue 329, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k4me1_borzoi.bw
+[2025-10-15 20:14:34,292] INFO: Exported borzoi BigWig for tissue 329, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k9me3_borzoi.bw
+[2025-10-15 20:14:41,082] INFO: Exported borzoi BigWig for tissue 329, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_rna_total_minus_borzoi.bw
+[2025-10-15 20:14:47,758] INFO: Exported borzoi BigWig for tissue 329, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_rna_total_plus_borzoi.bw
+[2025-10-15 20:14:54,115] INFO: Exported borzoi BigWig for tissue 346, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_ctcf_borzoi.bw
+[2025-10-15 20:15:00,705] INFO: Exported borzoi BigWig for tissue 346, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_dnase_borzoi.bw
+[2025-10-15 20:15:07,043] INFO: Exported borzoi BigWig for tissue 346, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k27ac_borzoi.bw
+[2025-10-15 20:15:13,452] INFO: Exported borzoi BigWig for tissue 346, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k27me3_borzoi.bw
+[2025-10-15 20:15:19,742] INFO: Exported borzoi BigWig for tissue 346, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k36me3_borzoi.bw
+[2025-10-15 20:15:26,283] INFO: Exported borzoi BigWig for tissue 346, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k4me1_borzoi.bw
+[2025-10-15 20:15:32,739] INFO: Exported borzoi BigWig for tissue 346, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k4me3_borzoi.bw
+[2025-10-15 20:15:39,271] INFO: Exported borzoi BigWig for tissue 346, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k9me3_borzoi.bw
+[2025-10-15 20:15:46,052] INFO: Exported borzoi BigWig for tissue 346, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_rna_total_minus_borzoi.bw
+[2025-10-15 20:15:52,749] INFO: Exported borzoi BigWig for tissue 346, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_rna_total_plus_borzoi.bw
+[2025-10-15 20:15:59,507] INFO: Exported borzoi BigWig for tissue 355, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_cage_minus_borzoi.bw
+[2025-10-15 20:16:06,397] INFO: Exported borzoi BigWig for tissue 355, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_cage_plus_borzoi.bw
+[2025-10-15 20:16:12,784] INFO: Exported borzoi BigWig for tissue 355, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_ctcf_borzoi.bw
+[2025-10-15 20:16:19,152] INFO: Exported borzoi BigWig for tissue 355, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k27ac_borzoi.bw
+[2025-10-15 20:16:25,475] INFO: Exported borzoi BigWig for tissue 355, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k36me3_borzoi.bw
+[2025-10-15 20:16:31,838] INFO: Exported borzoi BigWig for tissue 355, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k4me3_borzoi.bw
+[2025-10-15 20:16:38,396] INFO: Exported borzoi BigWig for tissue 355, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_rna_total_minus_borzoi.bw
+[2025-10-15 20:16:44,871] INFO: Exported borzoi BigWig for tissue 355, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_rna_total_plus_borzoi.bw
+[2025-10-15 20:16:51,258] INFO: Exported borzoi BigWig for tissue 404, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue404_atac_borzoi.bw
+[2025-10-15 20:16:57,600] INFO: Exported borzoi BigWig for tissue 413, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue413_atac_borzoi.bw
+[2025-10-15 20:17:03,980] INFO: Exported borzoi BigWig for tissue 420, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue420_atac_borzoi.bw
+[2025-10-15 20:17:10,457] INFO: Exported borzoi BigWig for tissue 431, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue431_atac_borzoi.bw
+[2025-10-15 20:17:16,922] INFO: Exported borzoi BigWig for tissue 432, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue432_atac_borzoi.bw
+[2025-10-15 20:17:23,495] INFO: Exported borzoi BigWig for tissue 433, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue433_atac_borzoi.bw
+[2025-10-15 20:17:29,848] INFO: Exported borzoi BigWig for tissue 435, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue435_atac_borzoi.bw
+[2025-10-15 20:17:36,150] INFO: Exported borzoi BigWig for tissue 439, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue439_atac_borzoi.bw
+[2025-10-15 20:17:42,439] INFO: Exported borzoi BigWig for tissue 454, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue454_atac_borzoi.bw
+[2025-10-15 20:17:48,789] INFO: Exported borzoi BigWig for tissue 456, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue456_atac_borzoi.bw
+[2025-10-15 20:17:55,874] INFO: Exported borzoi BigWig for tissue 487, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue487_cage_minus_borzoi.bw
+[2025-10-15 20:18:02,825] INFO: Exported borzoi BigWig for tissue 487, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue487_cage_plus_borzoi.bw
+[2025-10-15 20:18:09,954] INFO: Exported borzoi BigWig for tissue 512, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue512_cage_minus_borzoi.bw
+[2025-10-15 20:18:16,976] INFO: Exported borzoi BigWig for tissue 512, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue512_cage_plus_borzoi.bw
+[2025-10-15 20:18:24,004] INFO: Exported borzoi BigWig for tissue 523, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue523_cage_minus_borzoi.bw
+[2025-10-15 20:18:31,102] INFO: Exported borzoi BigWig for tissue 523, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue523_cage_plus_borzoi.bw
+[2025-10-15 20:18:38,038] INFO: Exported borzoi BigWig for tissue 544, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue544_cage_minus_borzoi.bw
+[2025-10-15 20:18:44,928] INFO: Exported borzoi BigWig for tissue 544, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue544_cage_plus_borzoi.bw
+[2025-10-15 20:18:51,896] INFO: Exported borzoi BigWig for tissue 547, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue547_cage_minus_borzoi.bw
+[2025-10-15 20:18:59,036] INFO: Exported borzoi BigWig for tissue 547, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue547_cage_plus_borzoi.bw
+[2025-10-15 20:19:06,076] INFO: Exported borzoi BigWig for tissue 548, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue548_cage_minus_borzoi.bw
+[2025-10-15 20:19:13,072] INFO: Exported borzoi BigWig for tissue 548, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue548_cage_plus_borzoi.bw
+[2025-10-15 20:19:19,970] INFO: Exported borzoi BigWig for tissue 564, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue564_cage_minus_borzoi.bw
+[2025-10-15 20:19:26,776] INFO: Exported borzoi BigWig for tissue 564, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue564_cage_plus_borzoi.bw
+[2025-10-15 20:19:33,852] INFO: Exported borzoi BigWig for tissue 565, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue565_cage_minus_borzoi.bw
+[2025-10-15 20:19:40,892] INFO: Exported borzoi BigWig for tissue 565, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue565_cage_plus_borzoi.bw
+[2025-10-15 20:19:48,082] INFO: Exported borzoi BigWig for tissue 580, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue580_cage_minus_borzoi.bw
+[2025-10-15 20:19:55,339] INFO: Exported borzoi BigWig for tissue 580, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue580_cage_plus_borzoi.bw
+[2025-10-15 20:20:02,312] INFO: Exported borzoi BigWig for tissue 581, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue581_cage_minus_borzoi.bw
+[2025-10-15 20:20:09,260] INFO: Exported borzoi BigWig for tissue 581, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue581_cage_plus_borzoi.bw
+[2025-10-15 20:20:15,734] INFO: Exported encode BigWig for tissue 57, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_ctcf_encode.bw
+[2025-10-15 20:20:22,315] INFO: Exported encode BigWig for tissue 57, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_dnase_encode.bw
+[2025-10-15 20:20:28,505] INFO: Exported encode BigWig for tissue 57, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k27ac_encode.bw
+[2025-10-15 20:20:34,912] INFO: Exported encode BigWig for tissue 57, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k27me3_encode.bw
+[2025-10-15 20:20:41,177] INFO: Exported encode BigWig for tissue 57, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k36me3_encode.bw
+[2025-10-15 20:20:47,467] INFO: Exported encode BigWig for tissue 57, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me1_encode.bw
+[2025-10-15 20:20:53,841] INFO: Exported encode BigWig for tissue 57, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me2_encode.bw
+[2025-10-15 20:21:00,080] INFO: Exported encode BigWig for tissue 57, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k4me3_encode.bw
+[2025-10-15 20:21:06,397] INFO: Exported encode BigWig for tissue 57, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k79me2_encode.bw
+[2025-10-15 20:21:12,587] INFO: Exported encode BigWig for tissue 57, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k9ac_encode.bw
+[2025-10-15 20:21:18,992] INFO: Exported encode BigWig for tissue 57, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_h3k9me3_encode.bw
+[2025-10-15 20:21:25,033] INFO: Exported encode BigWig for tissue 57, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_polya_minus_encode.bw
+[2025-10-15 20:21:31,015] INFO: Exported encode BigWig for tissue 57, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_polya_plus_encode.bw
+[2025-10-15 20:21:37,020] INFO: Exported encode BigWig for tissue 57, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_total_minus_encode.bw
+[2025-10-15 20:21:43,112] INFO: Exported encode BigWig for tissue 57, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue57_rna_total_plus_encode.bw
+[2025-10-15 20:21:48,994] INFO: Exported encode BigWig for tissue 59, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_cage_minus_encode.bw
+[2025-10-15 20:21:54,934] INFO: Exported encode BigWig for tissue 59, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_cage_plus_encode.bw
+[2025-10-15 20:22:01,300] INFO: Exported encode BigWig for tissue 59, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_ctcf_encode.bw
+[2025-10-15 20:22:07,795] INFO: Exported encode BigWig for tissue 59, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_dnase_encode.bw
+[2025-10-15 20:22:14,183] INFO: Exported encode BigWig for tissue 59, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k27me3_encode.bw
+[2025-10-15 20:22:20,459] INFO: Exported encode BigWig for tissue 59, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k36me3_encode.bw
+[2025-10-15 20:22:26,724] INFO: Exported encode BigWig for tissue 59, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me1_encode.bw
+[2025-10-15 20:22:33,044] INFO: Exported encode BigWig for tissue 59, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me2_encode.bw
+[2025-10-15 20:22:39,310] INFO: Exported encode BigWig for tissue 59, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k4me3_encode.bw
+[2025-10-15 20:22:45,607] INFO: Exported encode BigWig for tissue 59, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k79me2_encode.bw
+[2025-10-15 20:22:51,993] INFO: Exported encode BigWig for tissue 59, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k9ac_encode.bw
+[2025-10-15 20:22:58,355] INFO: Exported encode BigWig for tissue 59, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_h3k9me3_encode.bw
+[2025-10-15 20:23:04,422] INFO: Exported encode BigWig for tissue 59, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_polya_minus_encode.bw
+[2025-10-15 20:23:10,345] INFO: Exported encode BigWig for tissue 59, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_polya_plus_encode.bw
+[2025-10-15 20:23:16,344] INFO: Exported encode BigWig for tissue 59, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_total_minus_encode.bw
+[2025-10-15 20:23:22,468] INFO: Exported encode BigWig for tissue 59, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue59_rna_total_plus_encode.bw
+[2025-10-15 20:23:28,791] INFO: Exported encode BigWig for tissue 79, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_ctcf_encode.bw
+[2025-10-15 20:23:35,123] INFO: Exported encode BigWig for tissue 79, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k27ac_encode.bw
+[2025-10-15 20:23:41,410] INFO: Exported encode BigWig for tissue 79, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k27me3_encode.bw
+[2025-10-15 20:23:47,668] INFO: Exported encode BigWig for tissue 79, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k36me3_encode.bw
+[2025-10-15 20:23:53,993] INFO: Exported encode BigWig for tissue 79, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me1_encode.bw
+[2025-10-15 20:24:00,266] INFO: Exported encode BigWig for tissue 79, experiment h3k4me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me2_encode.bw
+[2025-10-15 20:24:06,646] INFO: Exported encode BigWig for tissue 79, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k4me3_encode.bw
+[2025-10-15 20:24:12,982] INFO: Exported encode BigWig for tissue 79, experiment h3k79me2 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k79me2_encode.bw
+[2025-10-15 20:24:19,285] INFO: Exported encode BigWig for tissue 79, experiment h3k9ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k9ac_encode.bw
+[2025-10-15 20:24:25,637] INFO: Exported encode BigWig for tissue 79, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_h3k9me3_encode.bw
+[2025-10-15 20:24:31,635] INFO: Exported encode BigWig for tissue 79, experiment rna_polya_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_rna_polya_minus_encode.bw
+[2025-10-15 20:24:37,643] INFO: Exported encode BigWig for tissue 79, experiment rna_polya_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue79_rna_polya_plus_encode.bw
+[2025-10-15 20:24:44,046] INFO: Exported encode BigWig for tissue 145, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_ctcf_encode.bw
+[2025-10-15 20:24:50,352] INFO: Exported encode BigWig for tissue 145, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k27ac_encode.bw
+[2025-10-15 20:24:56,812] INFO: Exported encode BigWig for tissue 145, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k27me3_encode.bw
+[2025-10-15 20:25:03,069] INFO: Exported encode BigWig for tissue 145, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k36me3_encode.bw
+[2025-10-15 20:25:09,356] INFO: Exported encode BigWig for tissue 145, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k4me1_encode.bw
+[2025-10-15 20:25:15,541] INFO: Exported encode BigWig for tissue 145, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k4me3_encode.bw
+[2025-10-15 20:25:21,954] INFO: Exported encode BigWig for tissue 145, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_h3k9me3_encode.bw
+[2025-10-15 20:25:27,921] INFO: Exported encode BigWig for tissue 145, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_rna_total_minus_encode.bw
+[2025-10-15 20:25:33,845] INFO: Exported encode BigWig for tissue 145, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue145_rna_total_plus_encode.bw
+[2025-10-15 20:25:40,135] INFO: Exported encode BigWig for tissue 176, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_ctcf_encode.bw
+[2025-10-15 20:25:46,425] INFO: Exported encode BigWig for tissue 176, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k27ac_encode.bw
+[2025-10-15 20:25:52,823] INFO: Exported encode BigWig for tissue 176, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k27me3_encode.bw
+[2025-10-15 20:25:59,180] INFO: Exported encode BigWig for tissue 176, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k36me3_encode.bw
+[2025-10-15 20:26:05,579] INFO: Exported encode BigWig for tissue 176, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k4me1_encode.bw
+[2025-10-15 20:26:11,935] INFO: Exported encode BigWig for tissue 176, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k4me3_encode.bw
+[2025-10-15 20:26:18,318] INFO: Exported encode BigWig for tissue 176, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_h3k9me3_encode.bw
+[2025-10-15 20:26:24,227] INFO: Exported encode BigWig for tissue 176, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_rna_total_minus_encode.bw
+[2025-10-15 20:26:30,242] INFO: Exported encode BigWig for tissue 176, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue176_rna_total_plus_encode.bw
+[2025-10-15 20:26:36,491] INFO: Exported encode BigWig for tissue 297, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_ctcf_encode.bw
+[2025-10-15 20:26:42,923] INFO: Exported encode BigWig for tissue 297, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k27ac_encode.bw
+[2025-10-15 20:26:49,187] INFO: Exported encode BigWig for tissue 297, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k27me3_encode.bw
+[2025-10-15 20:26:55,753] INFO: Exported encode BigWig for tissue 297, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k4me1_encode.bw
+[2025-10-15 20:27:02,151] INFO: Exported encode BigWig for tissue 297, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k4me3_encode.bw
+[2025-10-15 20:27:08,474] INFO: Exported encode BigWig for tissue 297, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_h3k9me3_encode.bw
+[2025-10-15 20:27:14,513] INFO: Exported encode BigWig for tissue 297, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_rna_total_minus_encode.bw
+[2025-10-15 20:27:20,546] INFO: Exported encode BigWig for tissue 297, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue297_rna_total_plus_encode.bw
+[2025-10-15 20:27:26,861] INFO: Exported encode BigWig for tissue 325, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_ctcf_encode.bw
+[2025-10-15 20:27:33,267] INFO: Exported encode BigWig for tissue 325, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k27ac_encode.bw
+[2025-10-15 20:27:39,733] INFO: Exported encode BigWig for tissue 325, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k27me3_encode.bw
+[2025-10-15 20:27:46,015] INFO: Exported encode BigWig for tissue 325, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k36me3_encode.bw
+[2025-10-15 20:27:52,429] INFO: Exported encode BigWig for tissue 325, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k4me1_encode.bw
+[2025-10-15 20:27:58,811] INFO: Exported encode BigWig for tissue 325, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k4me3_encode.bw
+[2025-10-15 20:28:05,101] INFO: Exported encode BigWig for tissue 325, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_h3k9me3_encode.bw
+[2025-10-15 20:28:11,159] INFO: Exported encode BigWig for tissue 325, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_rna_total_minus_encode.bw
+[2025-10-15 20:28:17,016] INFO: Exported encode BigWig for tissue 325, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue325_rna_total_plus_encode.bw
+[2025-10-15 20:28:23,351] INFO: Exported encode BigWig for tissue 329, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_ctcf_encode.bw
+[2025-10-15 20:28:29,825] INFO: Exported encode BigWig for tissue 329, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_dnase_encode.bw
+[2025-10-15 20:28:36,207] INFO: Exported encode BigWig for tissue 329, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k27ac_encode.bw
+[2025-10-15 20:28:42,555] INFO: Exported encode BigWig for tissue 329, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k27me3_encode.bw
+[2025-10-15 20:28:48,878] INFO: Exported encode BigWig for tissue 329, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k36me3_encode.bw
+[2025-10-15 20:28:55,260] INFO: Exported encode BigWig for tissue 329, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k4me1_encode.bw
+[2025-10-15 20:29:01,666] INFO: Exported encode BigWig for tissue 329, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_h3k9me3_encode.bw
+[2025-10-15 20:29:07,640] INFO: Exported encode BigWig for tissue 329, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_rna_total_minus_encode.bw
+[2025-10-15 20:29:13,680] INFO: Exported encode BigWig for tissue 329, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue329_rna_total_plus_encode.bw
+[2025-10-15 20:29:19,954] INFO: Exported encode BigWig for tissue 346, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_ctcf_encode.bw
+[2025-10-15 20:29:26,276] INFO: Exported encode BigWig for tissue 346, experiment dnase to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_dnase_encode.bw
+[2025-10-15 20:29:32,759] INFO: Exported encode BigWig for tissue 346, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k27ac_encode.bw
+[2025-10-15 20:29:39,166] INFO: Exported encode BigWig for tissue 346, experiment h3k27me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k27me3_encode.bw
+[2025-10-15 20:29:45,481] INFO: Exported encode BigWig for tissue 346, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k36me3_encode.bw
+[2025-10-15 20:29:51,771] INFO: Exported encode BigWig for tissue 346, experiment h3k4me1 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k4me1_encode.bw
+[2025-10-15 20:29:57,994] INFO: Exported encode BigWig for tissue 346, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k4me3_encode.bw
+[2025-10-15 20:30:04,310] INFO: Exported encode BigWig for tissue 346, experiment h3k9me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_h3k9me3_encode.bw
+[2025-10-15 20:30:10,258] INFO: Exported encode BigWig for tissue 346, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_rna_total_minus_encode.bw
+[2025-10-15 20:30:16,171] INFO: Exported encode BigWig for tissue 346, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue346_rna_total_plus_encode.bw
+[2025-10-15 20:30:22,113] INFO: Exported encode BigWig for tissue 355, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_cage_minus_encode.bw
+[2025-10-15 20:30:27,948] INFO: Exported encode BigWig for tissue 355, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_cage_plus_encode.bw
+[2025-10-15 20:30:34,306] INFO: Exported encode BigWig for tissue 355, experiment ctcf to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_ctcf_encode.bw
+[2025-10-15 20:30:40,821] INFO: Exported encode BigWig for tissue 355, experiment h3k27ac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k27ac_encode.bw
+[2025-10-15 20:30:47,143] INFO: Exported encode BigWig for tissue 355, experiment h3k36me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k36me3_encode.bw
+[2025-10-15 20:30:53,458] INFO: Exported encode BigWig for tissue 355, experiment h3k4me3 to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_h3k4me3_encode.bw
+[2025-10-15 20:30:59,457] INFO: Exported encode BigWig for tissue 355, experiment rna_total_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_rna_total_minus_encode.bw
+[2025-10-15 20:31:05,406] INFO: Exported encode BigWig for tissue 355, experiment rna_total_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue355_rna_total_plus_encode.bw
+[2025-10-15 20:31:11,854] INFO: Exported encode BigWig for tissue 404, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue404_atac_encode.bw
+[2025-10-15 20:31:18,219] INFO: Exported encode BigWig for tissue 413, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue413_atac_encode.bw
+[2025-10-15 20:31:24,543] INFO: Exported encode BigWig for tissue 420, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue420_atac_encode.bw
+[2025-10-15 20:31:30,883] INFO: Exported encode BigWig for tissue 431, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue431_atac_encode.bw
+[2025-10-15 20:31:37,198] INFO: Exported encode BigWig for tissue 432, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue432_atac_encode.bw
+[2025-10-15 20:31:43,488] INFO: Exported encode BigWig for tissue 433, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue433_atac_encode.bw
+[2025-10-15 20:31:49,811] INFO: Exported encode BigWig for tissue 435, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue435_atac_encode.bw
+[2025-10-15 20:31:56,159] INFO: Exported encode BigWig for tissue 439, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue439_atac_encode.bw
+[2025-10-15 20:32:02,466] INFO: Exported encode BigWig for tissue 454, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue454_atac_encode.bw
+[2025-10-15 20:32:08,889] INFO: Exported encode BigWig for tissue 456, experiment atac to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue456_atac_encode.bw
+[2025-10-15 20:32:14,754] INFO: Exported encode BigWig for tissue 487, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue487_cage_minus_encode.bw
+[2025-10-15 20:32:20,795] INFO: Exported encode BigWig for tissue 487, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue487_cage_plus_encode.bw
+[2025-10-15 20:32:26,735] INFO: Exported encode BigWig for tissue 512, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue512_cage_minus_encode.bw
+[2025-10-15 20:32:32,717] INFO: Exported encode BigWig for tissue 512, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue512_cage_plus_encode.bw
+[2025-10-15 20:32:38,640] INFO: Exported encode BigWig for tissue 523, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue523_cage_minus_encode.bw
+[2025-10-15 20:32:44,572] INFO: Exported encode BigWig for tissue 523, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue523_cage_plus_encode.bw
+[2025-10-15 20:32:50,562] INFO: Exported encode BigWig for tissue 544, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue544_cage_minus_encode.bw
+[2025-10-15 20:32:56,590] INFO: Exported encode BigWig for tissue 544, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue544_cage_plus_encode.bw
+[2025-10-15 20:33:02,551] INFO: Exported encode BigWig for tissue 547, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue547_cage_minus_encode.bw
+[2025-10-15 20:33:08,645] INFO: Exported encode BigWig for tissue 547, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue547_cage_plus_encode.bw
+[2025-10-15 20:33:14,560] INFO: Exported encode BigWig for tissue 548, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue548_cage_minus_encode.bw
+[2025-10-15 20:33:20,592] INFO: Exported encode BigWig for tissue 548, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue548_cage_plus_encode.bw
+[2025-10-15 20:33:26,532] INFO: Exported encode BigWig for tissue 564, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue564_cage_minus_encode.bw
+[2025-10-15 20:33:32,518] INFO: Exported encode BigWig for tissue 564, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue564_cage_plus_encode.bw
+[2025-10-15 20:33:38,400] INFO: Exported encode BigWig for tissue 565, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue565_cage_minus_encode.bw
+[2025-10-15 20:33:44,377] INFO: Exported encode BigWig for tissue 565, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue565_cage_plus_encode.bw
+[2025-10-15 20:33:50,256] INFO: Exported encode BigWig for tissue 580, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue580_cage_minus_encode.bw
+[2025-10-15 20:33:56,225] INFO: Exported encode BigWig for tissue 580, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue580_cage_plus_encode.bw
+[2025-10-15 20:34:02,206] INFO: Exported encode BigWig for tissue 581, experiment cage_minus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue581_cage_minus_encode.bw
+[2025-10-15 20:34:08,230] INFO: Exported encode BigWig for tissue 581, experiment cage_plus to /project/deeprna_data/corgi-reproduction/processed_data/figure3/grt_vs_borzoi/tissue581_cage_plus_encode.bw

@@ -10,6 +10,7 @@ import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
+PROCESSED_DIR = REPO_ROOT / "processed_data"
 
 ASSAYS = [
     "DNase",
@@ -23,8 +24,8 @@ ASSAYS = [
 ]
 TISSUES = [124, 192, 213, 277, 323]
 
-DEFAULT_RAW_DIR = DATA_DIR / "epigept" / "corgi_benchmark" / "raw_predictions"
-DEFAULT_OUTPUT_DIR = DATA_DIR / "epigept" / "corgi_benchmark" / "processed_predictions"
+DEFAULT_RAW_DIR = DATA_DIR / "epigept" / "raw_predictions"
+DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "figure3" / "corgi_vs_epigept" / "processed_predictions"
 DEFAULT_CHROM_SIZES = DATA_DIR / "hg38.chrom.sizes"
 
 

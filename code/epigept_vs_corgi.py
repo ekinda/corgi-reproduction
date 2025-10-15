@@ -25,12 +25,12 @@ ASSAYS = [
 ]
 TISSUES = [124, 192, 213, 277, 323]
 
-DEFAULT_EPI_DIR = DATA_DIR / "epigept" / "corgi_benchmark" / "processed_predictions"
+DEFAULT_EPI_DIR = PROCESSED_DIR / "figure3" / "corgi_vs_epigept" / "processed_predictions"
 DEFAULT_CORGI_DIR = PROCESSED_DIR / "figure2" / "cross_cell_tta"
 DEFAULT_CORGI_ALT_DIR = PROCESSED_DIR / "figure2" / "cross_both_tta"
-DEFAULT_REGIONS = DATA_DIR / "epigept" / "corgi_benchmark" / "comparison" / "chr8_test_regions.bed"
-DEFAULT_OUTPUT_DIR = DATA_DIR / "epigept" / "corgi_benchmark" / "comparison"
-DEFAULT_SUMMARY = DATA_DIR / "epigept" / "corgi_benchmark" / "results2.csv"
+DEFAULT_REGIONS = DATA_DIR / "epigept" / "chr8_test_regions.bed"
+DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "figure3" / "corgi_vs_epigept" / "comparison"
+DEFAULT_SUMMARY = PROCESSED_DIR / "figure3" / "corgi_vs_epigept" / "comparison" / "results.csv"
 
 
 def _run_bwtool(regions: Path, bigwig: Path, output: Path) -> None:
@@ -97,8 +97,8 @@ def _summarise_assay(tissue: int, assay: str, regions: Path, epi_dir: Path, corg
         prefix = corgi_dir / f"tissue{tissue}_{assay.lower()}"
     else:
         prefix = corgi_alt_dir / f"tissue{tissue}_{assay.lower()}"
-    corgi_bw = prefix.with_suffix("_grt.bw")
-    encode_bw = prefix.with_suffix("_encode.bw")
+    corgi_bw = prefix.parent / f"{prefix.name}_grt.bw"
+    encode_bw = prefix.parent / f"{prefix.name}_encode.bw"
     if not corgi_bw.exists() or not encode_bw.exists():
         raise FileNotFoundError(f"Missing Corgi or ENCODE BigWig for tissue {tissue} assay {assay}")
 

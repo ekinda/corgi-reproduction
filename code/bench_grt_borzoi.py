@@ -19,8 +19,8 @@ from scipy.stats import pearsonr, spearmanr
 from borzoi_pytorch import Borzoi
 from borzoi_pytorch.pytorch_borzoi_helpers import predict_tracks
 
-from corgi.corgi.config import config_corgi
-from corgi.corgi.model import Corgi
+from corgi.config import config_corgi
+from corgi.model import Corgi
 
 from benchmark_utils import transform_params, special_atac_params, transform_softclip, transform_scale, transform_scale_special
 from benchmark_utils import undo_squashed_scale, parse_bed_file_with_coords, one_hot_encode, load_genome, tile_region, tile_regions, crop_center

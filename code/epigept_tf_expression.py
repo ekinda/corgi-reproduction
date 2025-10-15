@@ -13,12 +13,13 @@ import qnorm
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
+PROCESSED_DIR = REPO_ROOT / "processed_data"
 
 DEFAULT_REFERENCE = DATA_DIR / "epigept" / "reference_TPM_tf_expr.csv"
 DEFAULT_TF_NPY = DATA_DIR / "tf_expression.npy"
 DEFAULT_TF_LIST = DATA_DIR / "trans_regulators_final_hgnc.txt"
-DEFAULT_OUTPUT_DIR = DATA_DIR / "epigept" / "corgi_benchmark" / "inputs"
-DEFAULT_BED_SOURCE = DATA_DIR / "fold3_notf_merged.bed"
+DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "figure3" / "corgi_vs_epigept"
+DEFAULT_BED_SOURCE = DATA_DIR / "figure3" / "fold3_notf_merged.bed"
 DEFAULT_TILES_PATH = DEFAULT_OUTPUT_DIR / "fold3_notf_epigept.bed"
 DEFAULT_CHR8_TEMPLATE = DEFAULT_OUTPUT_DIR / "fold3_notf_epigept_chr8_{index}.bed"
 

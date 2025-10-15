@@ -1,10 +1,109 @@
-[2025-10-13 21:05:18,794] INFO: Using device: cuda
-[2025-10-13 21:05:18,803] INFO: Parsed 35 regions from BED file.
-[2025-10-13 21:05:18,803] INFO: Generated 947 prediction tiles.
-[2025-10-13 21:05:18,804] INFO: Genome loaded.
+[2025-10-13 21:24:36,844] INFO: Using device: cuda
+[2025-10-13 21:24:36,849] INFO: Parsed 35 regions from BED file.
+[2025-10-13 21:24:36,849] INFO: Generated 947 prediction tiles.
+[2025-10-13 21:24:36,850] INFO: Genome loaded.
 /project/deeprna_data/corgi-reproduction/code/bench_grt_tta_crosscell.py:68: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
   checkpoint = torch.load(GRT_CHECKPOINT, map_location=device)
-[2025-10-13 21:05:23,639] INFO: Model loaded from /project/deeprna_data/corgi-reproduction/data/corgi_model.pt
-[2025-10-13 21:05:23,657] INFO: Loaded TF expression from /project/deeprna_data/corgi-reproduction/data/tf_expression.npy
-[2025-10-13 21:05:23,658] INFO: Processing Tissue 46.
-[2025-10-13 21:23:12,422] INFO: Processing Tissue 47.
+[2025-10-13 21:24:39,849] INFO: Model loaded from /project/deeprna_data/corgi-reproduction/data/corgi_model.pt
+[2025-10-13 21:24:39,854] INFO: Loaded TF expression from /project/deeprna_data/corgi-reproduction/data/tf_expression.npy
+[2025-10-13 21:24:39,854] INFO: Processing Tissue 46.
+[2025-10-13 21:42:09,282] INFO: Processing Tissue 47.
+[2025-10-13 22:02:10,395] INFO: Processing Tissue 49.
+[2025-10-13 22:17:26,218] INFO: Processing Tissue 50.
+[2025-10-13 22:34:10,946] INFO: Processing Tissue 54.
+[2025-10-13 22:50:27,489] INFO: Processing Tissue 105.
+[2025-10-13 23:07:44,488] INFO: Processing Tissue 159.
+[2025-10-13 23:23:35,598] INFO: Processing Tissue 160.
+[2025-10-13 23:38:56,623] INFO: Processing Tissue 161.
+[2025-10-13 23:54:18,888] INFO: Processing Tissue 174.
+[2025-10-14 00:07:43,896] INFO: Processing Tissue 202.
+[2025-10-14 00:26:57,173] INFO: Processing Tissue 203.
+[2025-10-14 00:43:38,856] INFO: Processing Tissue 211.
+[2025-10-14 00:58:27,132] INFO: Processing Tissue 212.
+[2025-10-14 01:12:49,515] INFO: Processing Tissue 213.
+[2025-10-14 01:27:11,674] INFO: Processing Tissue 214.
+[2025-10-14 01:41:34,982] INFO: Processing Tissue 239.
+[2025-10-14 02:00:20,028] INFO: Processing Tissue 267.
+[2025-10-14 02:18:07,617] INFO: Processing Tissue 268.
+[2025-10-14 02:37:58,005] INFO: Processing Tissue 275.
+[2025-10-14 02:55:36,579] INFO: Processing Tissue 276.
+[2025-10-14 03:13:14,093] INFO: Processing Tissue 277.
+[2025-10-14 03:32:49,794] INFO: Processing Tissue 278.
+[2025-10-14 03:50:28,354] INFO: Processing Tissue 288.
+[2025-10-14 04:05:12,993] INFO: Processing Tissue 318.
+[2025-10-14 04:20:06,412] INFO: Processing Tissue 319.
+[2025-10-14 04:34:46,877] INFO: Processing Tissue 320.
+[2025-10-14 04:52:17,561] INFO: Processing Tissue 321.
+[2025-10-14 05:07:03,821] INFO: Processing Tissue 323.
+[2025-10-14 05:25:45,348] INFO: Processing Tissue 324.
+[2025-10-14 05:42:04,538] INFO: Processing Tissue 422.
+[2025-10-14 05:54:21,531] INFO: Processing Tissue 442.
+[2025-10-14 06:06:28,904] INFO: Processing Tissue 443.
+[2025-10-14 06:18:34,328] INFO: Processing Tissue 473.
+[2025-10-14 06:31:03,725] INFO: Processing Tissue 474.
+[2025-10-14 06:43:33,025] INFO: Processing Tissue 515.
+[2025-10-14 06:56:06,256] INFO: Processing Tissue 517.
+/home/aksu/my_sandbox/lib/python3.11/site-packages/numpy/core/_methods.py:152: RuntimeWarning: overflow encountered in reduce
+  arrmean = umr_sum(arr, axis, dtype, keepdims=True, where=where)
+[2025-10-14 07:17:01,553] INFO: Correlation results written to correlation_results.csv
+/project/deeprna_data/corgi-reproduction/code/bench_grt_tta_crossboth.py:144: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if tracks_to_export is not 'all':
+[2025-10-14 09:19:23,002] INFO: Using device: cuda
+[2025-10-14 09:19:23,024] INFO: Parsed 138 regions from BED file.
+[2025-10-14 09:19:23,024] INFO: Generated 637 prediction tiles.
+[2025-10-14 09:19:23,025] INFO: Genome loaded.
+/project/deeprna_data/corgi-reproduction/code/bench_grt_tta_crossboth.py:68: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(GRT_CHECKPOINT, map_location=device)
+[2025-10-14 09:19:25,998] INFO: Model loaded from /project/deeprna_data/corgi-reproduction/data/corgi_model.pt
+[2025-10-14 09:19:26,004] INFO: Loaded TF expression from /project/deeprna_data/corgi-reproduction/data/tf_expression.npy
+[2025-10-14 09:19:26,004] INFO: Processing Tissue 46.
+[2025-10-14 09:31:22,095] INFO: Processing Tissue 47.
+[2025-10-14 09:44:48,938] INFO: Processing Tissue 49.
+[2025-10-14 09:55:03,937] INFO: Processing Tissue 50.
+[2025-10-14 10:06:15,905] INFO: Processing Tissue 54.
+[2025-10-14 10:17:08,856] INFO: Processing Tissue 105.
+[2025-10-14 10:28:43,369] INFO: Processing Tissue 159.
+[2025-10-14 10:39:20,674] INFO: Processing Tissue 160.
+[2025-10-14 10:49:39,029] INFO: Processing Tissue 161.
+[2025-10-14 10:59:57,228] INFO: Processing Tissue 174.
+[2025-10-14 11:08:59,067] INFO: Processing Tissue 202.
+[2025-10-14 11:21:50,969] INFO: Processing Tissue 203.
+[2025-10-14 11:33:01,488] INFO: Processing Tissue 211.
+[2025-10-14 11:42:58,042] INFO: Processing Tissue 212.
+[2025-10-14 11:52:36,656] INFO: Processing Tissue 213.
+[2025-10-14 12:02:15,291] INFO: Processing Tissue 214.
+[2025-10-14 12:11:54,077] INFO: Processing Tissue 239.
+[2025-10-14 12:24:25,908] INFO: Processing Tissue 267.
+[2025-10-14 12:35:40,560] INFO: Processing Tissue 268.
+[2025-10-14 12:47:48,581] INFO: Processing Tissue 275.
+[2025-10-14 12:59:01,048] INFO: Processing Tissue 276.
+[2025-10-14 13:10:14,116] INFO: Processing Tissue 277.
+[2025-10-14 13:22:39,584] INFO: Processing Tissue 278.
+[2025-10-14 13:33:52,358] INFO: Processing Tissue 288.
+[2025-10-14 13:43:32,386] INFO: Processing Tissue 318.
+[2025-10-14 13:53:12,544] INFO: Processing Tissue 319.
+[2025-10-14 14:02:53,317] INFO: Processing Tissue 320.
+[2025-10-14 14:14:08,909] INFO: Processing Tissue 321.
+[2025-10-14 14:23:49,207] INFO: Processing Tissue 323.
+[2025-10-14 14:36:01,685] INFO: Processing Tissue 324.
+[2025-10-14 14:46:39,280] INFO: Processing Tissue 422.
+[2025-10-14 14:54:49,328] INFO: Processing Tissue 442.
+[2025-10-14 15:02:58,942] INFO: Processing Tissue 443.
+[2025-10-14 15:11:08,518] INFO: Processing Tissue 473.
+[2025-10-14 15:19:34,377] INFO: Processing Tissue 474.
+[2025-10-14 15:28:00,420] INFO: Processing Tissue 515.
+[2025-10-14 15:36:28,495] INFO: Processing Tissue 517.
+/home/aksu/my_sandbox/lib/python3.11/site-packages/numpy/core/_methods.py:152: RuntimeWarning: overflow encountered in reduce
+  arrmean = umr_sum(arr, axis, dtype, keepdims=True, where=where)
+[2025-10-14 15:50:05,388] INFO: Correlation results written to correlation_results.csv
+/project/deeprna_data/corgi-reproduction/code/bench_grt_tta_crosssequence.py:143: SyntaxWarning: "is not" with a literal. Did you mean "!="?
+  if tracks_to_export is not 'all':
+[2025-10-14 17:14:20,594] INFO: Using device: cuda
+[2025-10-14 17:14:20,604] INFO: Parsed 138 regions from BED file.
+[2025-10-14 17:14:20,604] INFO: Generated 637 prediction tiles.
+[2025-10-14 17:14:20,605] INFO: Genome loaded.
+/project/deeprna_data/corgi-reproduction/code/bench_grt_tta_crosssequence.py:67: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(GRT_CHECKPOINT, map_location=device)
+[2025-10-14 17:14:23,597] INFO: Model loaded from /project/deeprna_data/corgi-reproduction/data/corgi_model.pt
+[2025-10-14 17:14:23,603] INFO: Loaded TF expression from /project/deeprna_data/corgi-reproduction/data/tf_expression.npy
+[2025-10-14 17:14:23,603] INFO: Processing Tissue 4.

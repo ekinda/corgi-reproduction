@@ -1,0 +1,5 @@
+
+==> EpiGePT preprocessing
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/epigept_tf_expression.py
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/epigept_process_predictions.py
+Running: /home/aksu/my_sandbox/bin/python /project/deeprna_data/corgi-reproduction/code/epigept_vs_corgi.py
