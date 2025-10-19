@@ -26,8 +26,8 @@ ASSAYS = [
 TISSUES = [124, 192, 213, 277, 323]
 
 DEFAULT_EPI_DIR = PROCESSED_DIR / "figure3" / "corgi_vs_epigept" / "processed_predictions"
-DEFAULT_CORGI_DIR = PROCESSED_DIR / "figure2" / "cross_cell_tta"
-DEFAULT_CORGI_ALT_DIR = PROCESSED_DIR / "figure2" / "cross_both_tta"
+DEFAULT_CORGI_DIR = PROCESSED_DIR / "figure2" / "cross_both_tta"
+DEFAULT_CORGI_EASYTEST_DIR = DATA_DIR / "figure3" / "tissues_124_192"
 DEFAULT_REGIONS = DATA_DIR / "epigept" / "chr8_test_regions.bed"
 DEFAULT_OUTPUT_DIR = PROCESSED_DIR / "figure3" / "corgi_vs_epigept" / "comparison"
 DEFAULT_SUMMARY = PROCESSED_DIR / "figure3" / "corgi_vs_epigept" / "comparison" / "results.csv"
@@ -94,9 +94,9 @@ def _summarise_assay(tissue: int, assay: str, regions: Path, epi_dir: Path, corg
     _run_bwtool(regions, epi_bw, epi_out)
 
     if tissue in (124, 192):
-        prefix = corgi_dir / f"tissue{tissue}_{assay.lower()}"
-    else:
         prefix = corgi_alt_dir / f"tissue{tissue}_{assay.lower()}"
+    else:
+        prefix = corgi_dir / f"tissue{tissue}_{assay.lower()}"
     corgi_bw = prefix.parent / f"{prefix.name}_grt.bw"
     encode_bw = prefix.parent / f"{prefix.name}_encode.bw"
     if not corgi_bw.exists() or not encode_bw.exists():
@@ -112,7 +112,7 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--epigept-dir", type=Path, default=DEFAULT_EPI_DIR)
     parser.add_argument("--corgi-dir", type=Path, default=DEFAULT_CORGI_DIR)
-    parser.add_argument("--corgi-alt-dir", type=Path, default=DEFAULT_CORGI_ALT_DIR)
+    parser.add_argument("--corgi-alt-dir", type=Path, default=DEFAULT_CORGI_EASYTEST_DIR)
     parser.add_argument("--regions", type=Path, default=DEFAULT_REGIONS)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--summary", type=Path, default=DEFAULT_SUMMARY)
@@ -125,7 +125,7 @@ def main(argv: list[str] | None = None) -> None:
             try:
                 _summarise_assay(tissue, assay, args.regions, args.epigept_dir, args.corgi_dir, args.corgi_alt_dir, args.output_dir)
             except FileNotFoundError:
-                continue
+                print(f"Skipping tissue {tissue} assay {assay} due to missing data.")
 
     _collect_statistics(args.output_dir, args.summary)
 

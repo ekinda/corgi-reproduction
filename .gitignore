@@ -1,2 +1,6 @@
 data/
 processed_data/
+logs/
+figure_notebooks_backup/
+scripts_2/
+corgi/

@@ -1,21 +1,23 @@
 import argparse
 import itertools
 import os
-from pathlib import Path
 
 import numpy
 
 numpy.random.seed(0)
 
 os.environ['KERAS_BACKEND'] = 'theano'
-# os.environ['THEANO_FLAGS'] = "device=cuda0"
+# Use GPU with compatibility settings to avoid NVRTC errors
+# If you get NVRTC errors, the issue is likely CUDA version compatibility
+# Try: device=cuda (instead of cuda0), and add force_device=True if needed
+os.environ['THEANO_FLAGS'] = "device=cuda,floatX=float32,optimizer=fast_run,gpuarray.preallocate=0.8,exception_verbosity=high"
 import theano
 from avocado import Avocado
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-PROCESSED_ROOT = REPO_ROOT / "processed_data" / "figure4"
-DEFAULT_DATA_DIR = PROCESSED_ROOT / "avocado_trainingfolds"
-DEFAULT_MODEL_DIR = PROCESSED_ROOT / "avocado_models"
+REPO_ROOT = '/project/deeprna_data/corgi-reproduction'
+PROCESSED_ROOT = REPO_ROOT + "/processed_data/figure4"
+DEFAULT_DATA_DIR = PROCESSED_ROOT + "/avocado_trainingfolds"
+DEFAULT_MODEL_DIR = PROCESSED_ROOT + "/avocado_models"
 
 TEST_TISSUES = [46, 47, 49, 50, 54, 105, 159, 160, 161, 174, 202, 203, 211, 212, 213,
                 214, 239, 267, 268, 275, 276, 277, 278, 288, 318, 319, 320, 321,
@@ -32,32 +34,29 @@ ASSAYS = ['dnase', 'atac', 'h3k4me1', 'h3k4me2', 'h3k4me3', 'h3k9ac', 'h3k9me3',
           'ctcf', 'cage', 'rampage', 'rna_total', 'rna_polya', 'rna_10x', 'wgbs']
 
 
-def load_training_tensors(data_dir: Path):
+def load_training_tensors(data_dir):
     data = {}
     excluded_tissues = set(TEST_TISSUES + VALID_TISSUES + EASYTEST_TISSUES)
     for celltype, assay in itertools.product(CELLTYPES, ASSAYS):
         if celltype in excluded_tissues and assay not in ['rna_polya', 'rna_total']:
             continue
-        tensor_path = data_dir / f"tissue_{celltype}_{assay}.npy"
-        if tensor_path.exists():
+        tensor_path = data_dir + "/tissue_{}_{}.npy".format(celltype, assay)
+        try:
             data[(celltype, assay)] = numpy.load(tensor_path)
+        except:
+            print("Warning: missing tensor at {}".format(tensor_path))
     if not data:
-        raise FileNotFoundError(
-            f"No Avocado tensors found in {data_dir}. Run avocado_prepare_data2.py first."
-        )
+        print("No Avocado tensors found in {}. Run avocado_prepare_data2.py first.".format(data_dir))
+        exit(1)
     return data
 
 
-def train(data_dir: Path, model_dir: Path, checkpoint_prefix: str, num_checkpoints: int,
-          checkpoint_step: int, checkpoint_offset: int, fit_epochs: int, epoch_size: int):
+def train(data_dir, model_dir, checkpoint_prefix, num_checkpoints,
+          checkpoint_step, checkpoint_offset, fit_epochs, epoch_size):
     print("Theano is using device:", theano.config.device)
     print("Theano float type:", theano.config.floatX)
 
-    data_dir = data_dir.resolve()
-    if not data_dir.exists():
-        raise FileNotFoundError(f"Expected Avocado tensors at {data_dir} (directory missing).")
-
-    model_dir.mkdir(parents=True, exist_ok=True)
+    #os.makedirs(model_dir)
 
     data = load_training_tensors(data_dir)
 
@@ -78,9 +77,11 @@ def train(data_dir: Path, model_dir: Path, checkpoint_prefix: str, num_checkpoin
     for checkpoint_idx in range(1, num_checkpoints + 1):
         model.fit(data, n_epochs=fit_epochs, epoch_size=epoch_size)
         tag = checkpoint_offset + checkpoint_idx * checkpoint_step
-        save_path = model_dir / f"{checkpoint_prefix}{tag}"
+        save_path = model_dir + "/{checkpoint_prefix}{tag}".format(
+            checkpoint_prefix=checkpoint_prefix, tag=tag
+        )
         model.save(str(save_path))
-        print(f"Epoch {tag} completed and saved to {save_path}.")
+        print("Epoch {tag} completed and saved to {save_path}.".format(tag=tag, save_path=save_path))
 
 
 def parse_args():
@@ -99,8 +100,8 @@ def parse_args():
 if __name__ == "__main__":
     args = parse_args()
     train(
-        data_dir=Path(args.data_dir),
-        model_dir=Path(args.model_dir),
+        data_dir=args.data_dir,
+        model_dir=args.model_dir,
         checkpoint_prefix=args.checkpoint_prefix,
         num_checkpoints=args.num_checkpoints,
         checkpoint_step=args.checkpoint_step,

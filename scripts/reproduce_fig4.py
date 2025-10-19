@@ -11,8 +11,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CODE_DIR = REPO_ROOT / "code"
 
-PREPARE_CMD = [sys.executable, str(CODE_DIR / "avocado_prepare_data2.py")]
-TRAIN_CMD = [sys.executable, str(CODE_DIR / "avocado_train2.py")]
+PREPARE_CMD = [sys.executable, str(CODE_DIR / "avocado_prepare_data.py")]
+TRAIN_CMD = [sys.executable, str(CODE_DIR / "avocado_train.py")]
 VALIDATION_CMD = [sys.executable, str(CODE_DIR / "avocado_validation.py")]
 TEST_CMD = [sys.executable, str(CODE_DIR / "avocado_test.py")]
 
@@ -30,8 +30,8 @@ def _run(cmd: list[str]) -> None:
 
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--skip-prepare", action="store_true", help="Skip avocado_prepare_data2.py.")
-    parser.add_argument("--skip-train", action="store_true", help="Skip avocado_train2.py.")
+    parser.add_argument("--skip-prepare", action="store_true", help="Skip avocado_prepare_data.py.")
+    parser.add_argument("--skip-train", action="store_true", help="Skip avocado_train.py.")
     parser.add_argument("--skip-validation", action="store_true", help="Skip avocado_validation.py.")
     parser.add_argument("--skip-test", action="store_true", help="Skip avocado_test.py.")
     parser.add_argument("--prepare-args", default="", help="Extra arguments to pass to avocado_prepare_data2.py.")

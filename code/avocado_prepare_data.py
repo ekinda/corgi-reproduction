@@ -6,10 +6,10 @@ import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = REPO_ROOT / "data"
-DEFAULT_INPUT_DIR = DATA_DIR / "avocado" / "pretraining_data_final2"
+DEFAULT_INPUT_DIR = DATA_DIR / "pretraining_data_final2"
 DEFAULT_OUTPUT_DIR = REPO_ROOT / "processed_data" / "figure4" / "avocado_trainingfolds"
 DEFAULT_BED = DEFAULT_INPUT_DIR / "hg38_sequence_folds_tfexcluded34.bed"
-DEFAULT_SUBSET_BED = DATA_DIR / "figure4" / "borzoi_trainingfolds_subset.bed"
+DEFAULT_SUBSET_BED = DATA_DIR / "figure4" / "borzoi_trainingfolds_subset_2.bed"
 DEFAULT_TRACKS = DATA_DIR / "experiments_final.txt"
 DEFAULT_MASK = DEFAULT_INPUT_DIR / "experiment_mask.npy"
 
@@ -122,8 +122,8 @@ if __name__ == '__main__':
     parser.add_argument("--subset-bed-path", default=str(DEFAULT_SUBSET_BED), help="Subset BED defining the regions used for reproduction (default: data/figure4/borzoi_trainingfolds_subset.bed)")
     parser.add_argument("--tracks", default=str(DEFAULT_TRACKS), help="Text file with Avocado experiment names (default: data/experiments_final.txt)")
     parser.add_argument("--mask", default=str(DEFAULT_MASK), help="NumPy mask array with available assays per tissue (default: data/avocado/pretraining_data_final2/experiment_mask.npy)")
-    parser.add_argument("--start-tissue", type=int, default=0, help="First tissue index to process (default: 0)")
-    parser.add_argument("--end-tissue", type=int, default=392, help="Last tissue index to process (default: 392)")
+    parser.add_argument("--start-tissue", type=int, default=0, help="First tissue index to process")
+    parser.add_argument("--end-tissue", type=int, default=599, help="Last tissue index to process")
     args = parser.parse_args()
 
     required = {
