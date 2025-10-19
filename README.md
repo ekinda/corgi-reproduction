@@ -10,6 +10,6 @@
 6. Download the model from `https://zenodo.org/records/17368602` and put it into corgi-reproduction/data
 7. Download the data from `` and put it into corgi-reproduction/processed_data
 
-## Step 2a: Reproduction of figures
+## Step 2: Reproduction of figures
 
 1. Run the notebooks at figure_notebooks.
