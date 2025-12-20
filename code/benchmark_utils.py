@@ -11,7 +11,7 @@ import pandas as pd
 from pyfaidx import Fasta
 import torch
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path('/project/deeprna_data/corgi-reproduction')
 
 # These are constants from the original configuration.
 transform_params = {
