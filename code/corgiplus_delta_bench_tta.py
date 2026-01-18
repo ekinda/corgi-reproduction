@@ -17,13 +17,40 @@ from corgi.trainer_corgiplus import CorgiPlusDataset
 from corgi.data_classes import CorgiSampler
 from corgi.utils import load_experiment_mask
 
-from benchmark_utils import crop_center
+from benchmark_utils import crop_center, dna_rc, predictions_rc, shift_dna
 
 SEQ_LENGTH = 524_288
 STRIDE = 393_216
 CROP = 65536
 BINSIZE = 64
 TARGET_BINS = 6144
+TTA_SHIFTS = (-2, 0, 2)
+RC_FLIP_PAIRS = ((12, 13), (14, 15), (16, 17), (18, 19))
+DEFAULT_EXPORT_TRACKS = [
+	"dnase",
+	"atac",
+	"h3k4me1",
+	"h3k4me2",
+	"h3k4me3",
+	"h3k9ac",
+	"h3k9me3",
+	"h3k27ac",
+	"h3k27me3",
+	"h3k36me3",
+	"h3k79me2",
+	"ctcf",
+]
+
+
+def _shift_dna_batch(sequence: torch.Tensor, shift: int) -> torch.Tensor:
+	"""Batch-aware shift of one-hot DNA; pads with zeros."""
+	if shift == 0:
+		return sequence
+	batch = sequence.shape[0]
+	pad = torch.zeros(batch, abs(shift), 4, device=sequence.device, dtype=sequence.dtype)
+	if shift > 0:
+		return torch.cat([pad, sequence[:, :-shift, :]], dim=1)
+	return torch.cat([sequence[:, -shift:, :], pad], dim=1)
 
 def load_model(checkpoint_path: str, model_type: str, device: torch.device, dnase_global: Optional[torch.Tensor] = None):
 	if model_type == 'corgi':
@@ -82,7 +109,93 @@ def infer_model_type(name: str) -> str:
 	else:
 		return 'corgi'
 
-def export_bedgraph(lines: Iterable[Tuple[str, int, int, float]], path: Path, chrom_sizes: Path):
+def _flip_strand_pairs(tensor: torch.Tensor, offset: int = 0) -> torch.Tensor:
+	"""Swap predefined strand pairs in-place on a cloned tensor."""
+	out = tensor.clone()
+	for src, dst in RC_FLIP_PAIRS:
+		src_i, dst_i = src + offset, dst + offset
+		if src_i < out.shape[1] and dst_i < out.shape[1]:
+			out[:, [src_i, dst_i], :] = out[:, [dst_i, src_i], :]
+	return out
+
+
+def rc_auxiliary(aux: torch.Tensor, model_type: str) -> torch.Tensor:
+	"""Reverse-complement auxiliary inputs according to model type."""
+	if aux is None:
+		return aux
+
+	def flip_last(x: torch.Tensor) -> torch.Tensor:
+		return torch.flip(x, dims=[-1])
+
+	if model_type == 'corgiplus_dnase':
+		dnase = flip_last(aux[:, 0:1, :])
+		mb = flip_last(aux[:, 1:, :])
+		mb = _flip_strand_pairs(mb, offset=0)
+		return torch.cat([dnase, mb], dim=1)
+
+	if model_type in ('corgiplus_rna', 'corgiplus_rna_nofilm'):
+		rna = flip_last(aux[:, 0:2, :])
+		rna = rna[:, [1, 0], :]
+		mb = flip_last(aux[:, 2:, :])
+		mb = _flip_strand_pairs(mb, offset=0)
+		return torch.cat([rna, mb], dim=1)
+
+	if model_type == 'corgiplusplus_rna':
+		rna = flip_last(aux[:, 0:2, :])
+		rna = rna[:, [1, 0], :]
+		mb_end = 2 + config_corgiplus["output_channels"]
+		mb = flip_last(aux[:, 2:mb_end, :])
+		mb = _flip_strand_pairs(mb, offset=0)
+		delta = flip_last(aux[:, mb_end:, :])
+		delta = delta[:, [1, 0], :]
+		return torch.cat([rna, mb, delta], dim=1)
+
+	# Generic corgiplus / corgiplus_impute: aux is mean baseline only.
+	mb = flip_last(aux)
+	mb = _flip_strand_pairs(mb, offset=0)
+	return mb
+
+
+def pred_tta(model: torch.nn.Module, dna_seq: torch.Tensor, trans_reg: Optional[torch.Tensor], model_type: str, aux: Optional[torch.Tensor] = None, cond: Optional[torch.Tensor] = None) -> torch.Tensor:
+	"""Run model with TTA (shifts and reverse complement) and average predictions."""
+	device_type = dna_seq.device.type
+	aux_rc = rc_auxiliary(aux, model_type) if aux is not None else None
+
+	def forward(seq_in: torch.Tensor, aux_in: Optional[torch.Tensor]) -> torch.Tensor:
+		if model_type == 'corgi':
+			return model(seq_in, trans_reg)
+		if model_type == 'big_corgi':
+			pred = model(seq_in, trans_reg)
+			return torch.clamp(pred, min=0.0)
+		if model_type == 'corgiplus_dnase':
+			if cond is None:
+				raise ValueError("DNase conditioning tensor is required for corgiplus_dnase")
+			return model(seq_in, aux_in.permute(0, 2, 1), cond)
+		if model_type == 'corgiplus_rna':
+			return model(seq_in, aux_in.permute(0, 2, 1), trans_reg)
+		if model_type == 'corgiplus_rna_nofilm':
+			return model(seq_in, aux_in.permute(0, 2, 1), None)
+		if model_type == 'corgiplusplus_rna':
+			return model(seq_in, aux_in.permute(0, 2, 1), trans_reg)
+		return model(seq_in, aux_in.permute(0, 2, 1), trans_reg)
+
+	preds: List[torch.Tensor] = []
+	with torch.no_grad():
+		with torch.autocast(device_type, dtype=torch.bfloat16):
+			for shift in TTA_SHIFTS:
+				seq_shift = _shift_dna_batch(dna_seq, shift)
+				pred = forward(seq_shift, aux)
+				preds.append(pred)
+
+				seq_rc = dna_rc(seq_shift)
+				pred_rc = forward(seq_rc, aux_rc)
+				pred_rc = predictions_rc(pred_rc)
+				preds.append(pred_rc)
+
+	preds = [p.float() for p in preds]
+	return torch.stack(preds, dim=0).mean(dim=0)
+
+def export_bedgraph(lines: Iterable[Tuple[str, int, int, float]], path: Path, chrom_sizes: Path, delete_bedgraph: bool = False):
 	lines = list(lines)
 	if not lines:
 		return
@@ -91,6 +204,8 @@ def export_bedgraph(lines: Iterable[Tuple[str, int, int, float]], path: Path, ch
 		for chrom, start, end, val in lines:
 			handle.write(f"{chrom}\t{start}\t{end}\t{val}\n")
 	subprocess.run(["bedGraphToBigWig", str(path), str(chrom_sizes), str(path.with_suffix(".bw"))], check=True)
+	if delete_bedgraph:
+		path.unlink(missing_ok=True)
 
 def parse_tissue_ids(path_or_list: str) -> List[int]:
 	path = Path(path_or_list)
@@ -121,6 +236,13 @@ def main():
 	parser.add_argument("--dna-path", type=Path, default=Path(config_corgiplus["dna_path"]))
 	parser.add_argument("--tissue-dir", type=Path, default=Path("/project/deeprna_data/revision_data_qn_parallel"))
 	parser.add_argument("--export-bigwig", action="store_true", help="Export bedGraph/BigWig tracks for predictions and baselines.")
+	parser.add_argument("--delete-bedgraph", action="store_true", help="Delete bedGraph files after converting to BigWig.")
+	parser.add_argument(
+		"--export-tracks",
+		type=str,
+		default=",".join(DEFAULT_EXPORT_TRACKS),
+		help="Comma-separated list of track names to export to BigWig; use 'all' to export every available track.",
+	)
 	parser.add_argument("--chrom-sizes", type=Path, default=Path("/project/deeprna_data/corgi-reproduction/data/hg38.chrom.sizes"))
 	args = parser.parse_args()
 
@@ -164,6 +286,7 @@ def main():
 	with open('/project/deeprna/data/experiments_final.txt', 'r', encoding='utf-8') as f:
 		experiments= f.read().strip().split()
 	exp_name_to_channel_id = {exp: i for i, exp in enumerate(experiments)}
+	export_tracks = None if args.export_tracks.lower() == 'all' else {t.strip().lower() for t in args.export_tracks.split(',') if t.strip()}
 
 	experiment_mask = load_experiment_mask(args.mask_path)
 	trans_reg_expression = torch.from_numpy(np.load(args.tf_expression)).float()
@@ -247,30 +370,32 @@ def main():
 					bin_ends_np = bin_starts_np + BINSIZE
 
 				with torch.no_grad():
-					with torch.autocast('cuda', dtype=torch.bfloat16):
-						if model_type == 'corgi':
-							pred = model(dna_seq, trans_reg)
-						elif model_type == 'big_corgi':
-							pred = model(dna_seq, trans_reg)
-							pred = torch.clamp(pred, min=0.0)
-						elif model_type == 'corgiplus_dnase':
-							aux = torch.cat([label[:, 0:1, :], mean_baseline], dim=1)
-							cond = dnase_global[tissue_id_device]
-							pred = model(dna_seq, aux.permute(0, 2, 1), cond)
-						elif model_type == 'corgiplus_rna':
-							aux = torch.cat([label[:, 16:18, :], mean_baseline], dim=1)
-							pred = model(dna_seq, aux.permute(0, 2, 1), trans_reg)
-						elif model_type == 'corgiplus_rna_nofilm':
-							aux = torch.cat([label[:, 16:18, :], mean_baseline], dim=1)
-							pred = model(dna_seq, aux.permute(0, 2, 1), trans_reg=None)
-						elif model_type == 'corgiplusplus_rna':
-							rna_tracks = label[:, 16:18, :]
-							delta_rna = rna_tracks - mean_baseline[:, 16:18, :]
-							aux = torch.cat([rna_tracks, mean_baseline, delta_rna], dim=1)
-							pred = model(dna_seq, aux.permute(0, 2, 1), trans_reg)
-						else:
-							aux = mean_baseline
-							pred = model(dna_seq, aux.permute(0, 2, 1), trans_reg)
+					aux = None
+					cond = None
+					trans_reg_for_pred: Optional[torch.Tensor] = trans_reg
+					if model_type == 'corgi':
+						pred = pred_tta(model, dna_seq, trans_reg_for_pred, model_type, aux, cond)
+					elif model_type == 'big_corgi':
+						pred = pred_tta(model, dna_seq, trans_reg_for_pred, model_type, aux, cond)
+					elif model_type == 'corgiplus_dnase':
+						aux = torch.cat([label[:, 0:1, :], mean_baseline], dim=1)
+						cond = dnase_global[tissue_id_device]
+						pred = pred_tta(model, dna_seq, trans_reg_for_pred, model_type, aux, cond)
+					elif model_type == 'corgiplus_rna':
+						aux = torch.cat([label[:, 16:18, :], mean_baseline], dim=1)
+						pred = pred_tta(model, dna_seq, trans_reg_for_pred, model_type, aux, cond)
+					elif model_type == 'corgiplus_rna_nofilm':
+						aux = torch.cat([label[:, 16:18, :], mean_baseline], dim=1)
+						trans_reg_for_pred = None
+						pred = pred_tta(model, dna_seq, trans_reg_for_pred, model_type, aux, cond)
+					elif model_type == 'corgiplusplus_rna':
+						rna_tracks = label[:, 16:18, :]
+						delta_rna = rna_tracks - mean_baseline[:, 16:18, :]
+						aux = torch.cat([rna_tracks, mean_baseline, delta_rna], dim=1)
+						pred = pred_tta(model, dna_seq, trans_reg_for_pred, model_type, aux, cond)
+					else:
+						aux = mean_baseline
+						pred = pred_tta(model, dna_seq, trans_reg_for_pred, model_type, aux, cond)
 
 				pred_cpu = pred.to(device='cpu', dtype=torch.float32)
 				pred_delta_cpu = pred_cpu - mean_baseline_cpu
@@ -289,6 +414,9 @@ def main():
 						if not mean_written and seq_np[i] not in mean_done:
 							for c in active_channels:
 								exp_name = experiments[c]
+								exp_key = exp_name.lower()
+								if export_tracks is not None and exp_key not in export_tracks:
+									continue
 								mean_vals = mean_baseline_cpu[i, c].numpy().astype(float)
 								mean_lines.setdefault(exp_name, []).extend(
 									zip((chrom,) * TARGET_BINS, starts_np.tolist(), ends_np.tolist(), mean_vals.tolist())
@@ -296,6 +424,9 @@ def main():
 							mean_done.add(int(seq_np[i]))
 						for c in active_channels:
 							exp_name = experiments[c]
+							exp_key = exp_name.lower()
+							if export_tracks is not None and exp_key not in export_tracks:
+								continue
 							gt_vals = label_cpu[i, c].numpy().astype(float)
 							gt_delta_vals = label_delta_cpu[i, c].numpy().astype(float)
 							pred_delta_vals = pred_delta_cpu[i, c].numpy().astype(float)
@@ -390,12 +521,12 @@ def main():
 			all_pearson_baseline.append(pearson_baseline)
 
 			if args.export_bigwig:
-				for (t_id, exp_name), lines in gt_lines.items():
-					export_bedgraph(lines, outdir / f"gt_t{t_id}_{exp_name}.bedgraph", args.chrom_sizes)
+				#for (t_id, exp_name), lines in gt_lines.items():
+				#	export_bedgraph(lines, outdir / f"gt_t{t_id}_{exp_name}.bedgraph", args.chrom_sizes, args.delete_bedgraph)
 				for (t_id, exp_name), lines in gt_delta_lines.items():
-					export_bedgraph(lines, outdir / f"gt_delta_t{t_id}_{exp_name}.bedgraph", args.chrom_sizes)
+					export_bedgraph(lines, outdir / f"gt_delta_t{t_id}_{exp_name}.bedgraph", args.chrom_sizes, args.delete_bedgraph)
 				for (m_name, t_id, exp_name), lines in pred_delta_lines.items():
-					export_bedgraph(lines, outdir / f"pred_delta_{m_name}_t{t_id}_{exp_name}.bedgraph", args.chrom_sizes)
+					export_bedgraph(lines, outdir / f"pred_delta_{m_name}_t{t_id}_{exp_name}.bedgraph", args.chrom_sizes, args.delete_bedgraph)
 				gt_lines.clear()
 				gt_delta_lines.clear()
 				pred_delta_lines.clear()
@@ -429,7 +560,7 @@ def main():
 
 		if args.export_bigwig and not mean_written and mean_lines:
 			for exp_name, lines in mean_lines.items():
-				export_bedgraph(lines, outdir / f"mean_{exp_name}.bedgraph", args.chrom_sizes)
+				export_bedgraph(lines, outdir / f"mean_{exp_name}.bedgraph", args.chrom_sizes, args.delete_bedgraph)
 			mean_written = True
 			mean_lines.clear()
 
