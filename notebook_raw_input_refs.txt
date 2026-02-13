@@ -1,0 +1,70 @@
+### fig2.ipynb
+/project/deeprna/data/Homo_sapiens.gene_info.tsv
+/project/deeprna_data/corgi-reproduction/data/Homo_sapiens.gene_info.tsv
+/project/deeprna_data/corgi-reproduction/data/all_cell_types.csv
+/project/deeprna_data/corgi-reproduction/processed_data/figure2/cross_both_tta/correlation_results.csv
+/project/deeprna_data/corgi-reproduction/processed_data/figure2/cross_cell_tta/correlation_results.csv
+/project/deeprna_data/corgi-reproduction/processed_data/figure2/cross_region_tta/correlation_results.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure2/gene_level_cross_both_genebody/all_expressions_encode.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure2/gene_level_cross_both_genebody/all_expressions_grt.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure2/gene_level_cross_celltype_genebody/all_expressions_encode.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure2/gene_level_cross_celltype_genebody/all_expressions_grt.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure2/gene_level_cross_region_genebody/all_expressions_encode.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure2/gene_level_cross_region_genebody/all_expressions_grt.csv
+
+### fig3.ipynb
+/project/deeprna/data/Homo_sapiens.gene_info.tsv
+/project/deeprna/data/revision/epigept_benchmark_new/benchmark_results.tsv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure3/gene_level_cross_region_genebody_vsborzoi
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure3/gene_level_cross_region_genebody_vsborzoi/all_expressions_borzoi.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure3/gene_level_cross_region_genebody_vsborzoi/all_expressions_corgi.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure3/gene_level_cross_region_genebody_vsborzoi/all_expressions_encode.csv
+/project/deeprna_data/corgi-reproduction/processed_data_extended/figure3/grt_vs_borzoi/correlation_results.csv
+
+### fig4.ipynb
+/project/deeprna/data/revision/imputation_benchmark_new_avocado.npz
+/project/deeprna/data/revision/imputation_benchmark_new_chunk{i}.npz
+
+### fig5.ipynb
+/project/deeprna/data/experiments_final.txt
+/project/deeprna/data/revision/cis_contributions_delta.pt
+/project/deeprna/data/revision/cis_tfbs_matrix_z.npy
+/project/deeprna/data/revision/cis_tfbs_matrix_z_tfnames.npy
+/project/deeprna/data/revision/trans_contrib_dlshap2_delta.pt
+/project/deeprna/data/tf_genes/trans_regulators_final_hgnc.txt
+/project/deeprna_data/pretraining_data_final2/experiment_mask.npy
+/project/deeprna_data/pretraining_data_final2/tf_expression.npy
+
+### fig6.ipynb
+/project/deeprna/benchmark/exons.gtf
+/project/deeprna/data/revision/insilico_ko_selected_regions.bed
+/project/deeprna/data/revision/knockouts
+bin_gene_lists.npz
+cis_ko_preds.npy
+cis_ko_tfbs_coords.npy
+cis_ko_tfbs_counts.npy
+ground_truth.npy
+knockout_metadata.npz
+mean_baseline.npy
+mean_tf_preds.npy
+tissue_preds.npy
+trans_ko_preds.npy
+
+### fig7.ipynb
+/project/deeprna/data/revision/eqtl/finemapped_eqtls_14tissue_corgi.tsv
+
+### supplement.ipynb
+/project/deeprna/data/mRNA_halflife_features_epinformer.csv
+/project/deeprna/data/tf_genes/trans_regulators_final_ensg.txt
+/project/deeprna/data/tf_genes/trans_regulators_final_hgnc.txt
+/project/deeprna_data/encode_data/0/rna_total_quantification_s1_r1.tsv
+/project/deeprna_data/encode_data/{tissue_id}
+{tissue_dir}/rna_polyA_*.tsv
+{tissue_dir}/rna_total_*.tsv
+
+### supplement_fig5.ipynb
+/project/deeprna/data/experiments_final.txt
+/project/deeprna/data/revision/trans_contrib_dlshap2_delta.pt
+/project/deeprna/data/tf_genes/trans_regulators_final_hgnc.txt
+/project/deeprna_data/pretraining_data_final2/experiment_mask.npy
+/project/deeprna_data/pretraining_data_final2/tf_expression.npy
