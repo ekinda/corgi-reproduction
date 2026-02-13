@@ -50,9 +50,10 @@ def compute_gene_level_expression(pred_bw, true_bw, exon_bed, outdir):
         
 
 def main():
-    bw_dir = REPO_ROOT / "processed_data" / "figure2" / "cross_region_tta"
-    exon_bed = REPO_ROOT / "data" / "exons_coding_fold3.bed"
-    outdir = REPO_ROOT / "processed_data" / "figure2" / "gene_level_cross_region"
+    bw_dir = REPO_ROOT / "processed_data_extended" / "figure2" / "cross_region_tta"
+    # exon_bed = REPO_ROOT / "data" / "exons_coding_fold3.bed"
+    exon_bed = '/project/deeprna_data/corgi-reproduction/data/genebody_coding_fold3.bed'
+    outdir = REPO_ROOT / "processed_data_extended" / "figure2" / "gene_level_cross_region_genebody"
 
     all_models = ['grt', 'encode']
     prediction_models = ['grt']
