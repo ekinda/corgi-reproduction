@@ -1,15 +1,56 @@
-# Tutorial to reproduce results and figures from the Corgi paper
+# Reproducing figures from the Corgi paper
 
-## Step 1: Downloading the model, data and setting up the virtual environment
+This repository includes ready-to-run reproduction notebooks under `reproduce_notebooks/`.
 
-1. Clone the repository. `git clone https://github.com/ekinda/corgi-reproduction.git`.
-2. Create a new virtual environment called `corgi` at the desired path with `python -m venv corgivenv`.
-3. Activate the environment with `source corgivenv/bin/activate` 
-4. Install the corgi package from https://github.com/ekinda/corgi using `pip install git+https://github.com/username/repository.git`
-5. Install the rest of the required packages with `pip install -r corgi-reproduction/environment.txt`
-6. Download the model from `https://zenodo.org/records/17368602` and put it into corgi-reproduction/data
-7. Download the data from `` and put it into corgi-reproduction/processed_data
+## Quick start
 
-## Step 2: Reproduction of figures
+1. Clone this repository and enter it:
 
-1. Run the notebooks at figure_notebooks.
+	```bash
+	git clone https://github.com/ekinda/corgi-reproduction.git
+	cd corgi-reproduction
+	```
+
+2. Create and activate a Python environment:
+
+	```bash
+	python -m venv .venv
+	source .venv/bin/activate
+	```
+
+3. Install notebook dependencies:
+
+	```bash
+	pip install -r requirements-reproduction.txt
+	```
+
+4. Download `reproduction_data.tar.gz` from Zenodo and extract it in the repository root.
+
+	- Zenodo URL (to be updated): `REPLACE_WITH_ZENODO_LINK`
+	- After extraction, this path must exist:
+
+	```
+	corgi-reproduction/reproduction_data/
+	```
+
+5. Run the notebooks:
+
+	```bash
+	cd reproduce_notebooks
+	jupyter lab
+	```
+
+	Then run all cells for:
+
+	- `fig2.ipynb`
+	- `fig3.ipynb`
+	- `fig4.ipynb`
+	- `fig5.ipynb`
+	- `fig6.ipynb`
+	- `fig7.ipynb`
+
+## Notes
+
+- The reproduction notebooks are configured to read inputs from `../reproduction_data/...`.
+- Figure export calls are disabled in notebooks (plots are shown inline).
+- If a notebook was previously run with old state, restart the kernel and run all cells from top to bottom.
