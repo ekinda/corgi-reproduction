@@ -26,7 +26,7 @@ This repository includes ready-to-run reproduction notebooks under `reproduce_no
 
 4. Download `reproduction_data.tar.gz` from Zenodo and extract it in the repository root.
 
-	- Zenodo URL (to be updated): `REPLACE_WITH_ZENODO_LINK`
+	- Zenodo URL (to be updated):
 	- After extraction, this path must exist:
 
 	```
@@ -52,5 +52,3 @@ This repository includes ready-to-run reproduction notebooks under `reproduce_no
 ## Notes
 
 - The reproduction notebooks are configured to read inputs from `../reproduction_data/...`.
-- Figure export calls are disabled in notebooks (plots are shown inline).
-- If a notebook was previously run with old state, restart the kernel and run all cells from top to bottom.

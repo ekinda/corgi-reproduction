@@ -1,0 +1,15 @@
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+pillow
+torch
+statsmodels
+gseapy
+matplotlib-venn
+plottable
+requests
+urllib3
+jupyterlab
+ipykernel
